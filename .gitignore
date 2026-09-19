@@ -30,3 +30,6 @@ package-lock.json
 .agents/
 .claude/
 skills-lock.json
+
+# Screenshots (Dev-Artefakte)
+.screenshots/

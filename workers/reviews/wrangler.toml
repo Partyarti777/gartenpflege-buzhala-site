@@ -1,0 +1,17 @@
+name = "buzhala-reviews"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# Google Places API (Secret — via `wrangler secret put GOOGLE_PLACES_API_KEY`)
+# Place ID deines Betriebs (Variable, nicht secret)
+
+[[kv_namespaces]]
+binding = "REVIEWS_CACHE"
+id = ""  # wird durch `wrangler kv:namespace create REVIEWS_CACHE` generiert
+
+[vars]
+PLACE_ID = "ChIJ_____PLACE_ID_HIER_EINTRAGEN_____"  # ← TODO: ersetzen mit echter Place ID
+BUSINESS_NAME = "Gartenpflege & Service Buzhala"
+
+[triggers]
+crons = ["0 4 * * *"]  # täglich 04:00 UTC = 06:00 MEZ = Cache-Refresh

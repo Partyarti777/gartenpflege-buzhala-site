@@ -23,7 +23,6 @@
 <meta property="og:description" content="Ihr Experte für Gartenpflege in Külsheim & Main-Tauber-Kreis. 10 Bewertungen mit 4.9★. Festpreis-Garantie. Vor-Ort-Beratung kostenlos — jetzt Termin sichern!" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="de_DE" />
-<meta property="og:locale:alternate" content="de_DE" />
 <meta property="og:url" content="https://www.gartenpflegeservicebuzhala.de/" />
 <meta property="og:site_name" content="Gartenpflege & Service Buzhala · Külsheim" />
 <meta property="og:image" content="https://www.gartenpflegeservicebuzhala.de/og-image-1200x630.jpg" />
@@ -178,10 +177,9 @@
   /* ========== HEADER ========== */
   .site-header {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(251,250,246, 0.92);
-    backdrop-filter: saturate(140%) blur(10px);
-    -webkit-backdrop-filter: saturate(140%) blur(10px);
+    background: #fbfaf6; /* SOLID statt transparent, damit Bar/Header sichtbar */
     border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 8px -4px rgba(11,31,23,0.08);
   }
   .nav {
     display: flex; align-items: center; justify-content: space-between;
@@ -220,7 +218,8 @@
     display: inline-flex; align-items: center; gap: 8px;
     background: var(--primary);
     color: white !important;
-    padding: 11px 20px;
+    padding: 13px 20px;
+    min-height: 44px;
     border-radius: 999px;
     font-weight: 600;
     font-size: 0.92rem;
@@ -788,6 +787,34 @@
 
   /* ========== TESTIMONIALS ========== */
   .testimonials-section { background: var(--bg-soft); }
+  .testi-source-heading {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--line);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-darker);
+  }
+  .testi-source-heading:first-of-type { margin-top: 8px; }
+  .testi-source-heading .src-icon { font-size: 1.3rem; }
+  .testi-source-heading .src-meta {
+    margin-left: auto;
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .testi-timestamp {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    font-weight: 400;
+  }
   .testi-head { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; margin-bottom: 40px; }
   .rating-combined { text-align: center; }
   .rating-num {
@@ -882,6 +909,7 @@
     box-shadow: var(--shadow-sm); max-width: 640px; margin-left: auto; margin-right: auto;
   }
   .testi-summary strong { color: var(--ink); }
+  .testi-cta-row { grid-column: 1 / -1; display: flex; justify-content: center; margin: 24px 0 8px; }
   .testi-grid {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
     justify-items: stretch; align-items: stretch;
@@ -1407,12 +1435,14 @@
   .cookie-text a { color: var(--primary-dark); text-decoration: underline; }
   .cookie-actions { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
   .cookie-actions .btn {
-    padding: 11px 18px;
+    padding: 13px 18px;
+    min-height: 44px;
     font-size: 0.92rem;
     white-space: nowrap;
   }
   .cookie-actions .cookie-link {
-    background: none; border: none; padding: 11px 12px;
+    background: none; border: none; padding: 13px 14px;
+    min-height: 44px;
     color: #4a5e57; text-decoration: underline;
     font-size: 0.9rem; cursor: pointer; font-family: inherit;
   }
@@ -1499,6 +1529,11 @@
       .cookie-settings-actions .btn { width: 100%; justify-content: center; }
     }
 
+  .contact-form-status { padding: 14px 18px; border-radius: 12px; margin-bottom: 16px; font-size: 0.95rem; line-height: 1.5; }
+  .contact-form-status.status-ok { background: #e8f5e9; color: #1b5e20; border: 1px solid #2e7d32; }
+  .contact-form-status.status-error { background: #ffebee; color: #b71c1c; border: 1px solid #c62828; }
+  .contact-form-status a { color: inherit; text-decoration: underline; font-weight: 600; }
+
   /* ========== FOOTER ========== */
   .site-footer { padding: 70px 0 32px; background: var(--ink); color: rgba(255,255,255,0.92); }
   /* Override brand.css: its .site-footer .wrap is display:grid, but our HTML
@@ -1552,7 +1587,9 @@
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
     .contact-grid { grid-template-columns: 1fr; gap: 30px; }
     .area-grid { grid-template-columns: 1fr 1fr; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-grid { grid-template-columns: 1fr !important; gap: 40px; }
+    .about-visual { width: 100% !important; max-width: 100% !important; }
+    .about-content { width: 100% !important; padding-left: 0 !important; padding-right: 0 !important; }
     .nav-links { display: none; }
     .nav-links.open {
       display: flex; flex-direction: column;
@@ -1612,40 +1649,41 @@
     .service-card p, .area-card-new p, .process-step p { font-size: 0.92rem; }
     /* Map-info: addresses text breathing room tighter */
     .map-info .hours li { padding: 5px 0; font-size: 0.92rem; }
-    /* Body bottom padding so sticky CTA does not cover last content */
-    body { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0)) !important; }
-    body.has-cookie-banner { padding-bottom: calc(180px + env(safe-area-inset-bottom, 0)) !important; }
+    /* Sticky-CTA ist jetzt IM Header integriert — kein separates Top-Positioning mehr nötig */
+    body { padding-top: 0 !important; padding-bottom: 0 !important; }
   }
 
-  /* ========== STICKY MOBILE CTA ========== */
+  /* ========== STICKY MOBILE CTA (jetzt im Header integriert) ========== */
   .sticky-mobile-cta {
     display: none;
   }
   @media (max-width: 720px) {
+    .site-header { background: transparent !important; box-shadow: none !important; border-bottom: none !important; }
+    .site-header .wrap { display: none !important; }
     .sticky-mobile-cta {
-      display: flex;
-      position: fixed;
-      left: 10px; right: 10px;
-      bottom: calc(10px + env(safe-area-inset-bottom, 0));
-      z-index: 220;
+      display: flex !important;
       gap: 8px;
-      padding: 0;
-      pointer-events: none; /* let buttons capture, wrapper transparent */
+      padding: 10px 12px;
+      background: var(--bg-soft, #f3efe2);
+      border-bottom: 1px solid var(--line, #e2e8e3);
+      width: 100%;
+      border-radius: 0 0 14px 14px;
+      box-shadow: 0 6px 18px -8px rgba(11,31,23,0.35);
     }
     .sticky-mobile-cta a {
       flex: 1 1 0;
-      display: inline-flex;
+      display: inline-flex !important;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 14px 12px;
-      border-radius: 14px;
+      padding: 14px 14px !important;
+      min-height: 48px;
+      border-radius: 12px;
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
-      font-size: 0.98rem;
+      font-size: 0.95rem;
       text-decoration: none !important;
-      box-shadow: 0 8px 22px -8px rgba(11,31,23,.4);
-      pointer-events: auto;
+      box-shadow: 0 4px 14px -6px rgba(11,31,23,.3);
       line-height: 1.1;
     }
     .sticky-mobile-cta a.smcall {
@@ -1656,11 +1694,10 @@
       background: #25D366;
       color: white;
       flex: 0 0 auto;
-      padding: 14px 16px;
+      padding: 14px 18px !important;
     }
-    .sticky-mobile-cta a svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .sticky-mobile-cta a svg { width: 20px !important; height: 20px !important; flex-shrink: 0; }
     .sticky-mobile-cta a:hover { transform: translateY(-1px); }
-    body.has-cookie-banner .sticky-mobile-cta { bottom: calc(110px + env(safe-area-inset-bottom, 0)); }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -1671,25 +1708,15 @@
 </style>
 </head>
 <body itemscope itemtype="https://schema.org/LandscapingBusiness" class="has-cookie-banner">
+<script>if ("serviceWorker" in navigator) { navigator.serviceWorker.register("/sw.js").catch(() => {}); }</script>
 
-<!-- ===== STICKY MOBILE CTA ===== -->
-<nav class="sticky-mobile-cta" aria-label="Schnellkontakt (sticky)">
-  <a class="smcall" href="tel:+4915734405927" aria-label="Jetzt anrufen">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-    <span>Jetzt anrufen</span>
-  </a>
-  <a class="smwa" href="https://wa.me/4915734405927?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eine%20Gartenpflege.%20K%C3%B6nnen%20Sie%20mich%20kurz%20beraten%3F" rel="noopener" aria-label="WhatsApp schreiben">
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-    <span>WhatsApp</span>
-  </a>
-</nav>
-
+<!-- ===== STICKY MOBILE CTA (jetzt im Header integriert) ===== -->
 <!-- ===== COOKIE-BANNER ===== -->
 <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie-Einstellungen" hidden>
   <div class="cookie-inner">
     <div class="cookie-text">
       <strong>🍪 Cookies &amp; Datenschutz</strong>
-      <p>Diese Website verwendet Cookies und vergleichbare Technologien. <strong>Notwendige</strong> Cookies sind für den Betrieb erforderlich. <strong>Statistik</strong> hilft uns, die Seite zu verbessern. Details in der <a href="cookies.html">Cookie-Erklärung</a> und <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+      <p>Diese Website verwendet Cookies und vergleichbare Technologien. <strong>Notwendige</strong> Cookies sind für den Betrieb erforderlich. <strong>Statistik</strong> hilft uns, die Seite zu verbessern. Details in der <a href="cookies.html">Cookie-Erklärung</a> und <a href="datenschutz.html">Datenschutzerklärung</a>. <button type="button" class="cookie-info-btn" aria-label="Was bedeutet Statistik-Cookie?">ⓘ</button></p>
     </div>
     <div class="cookie-actions">
       <button type="button" class="cookie-link" data-cookie="necessary">Nur notwendige</button>
@@ -1789,6 +1816,16 @@
 
 <!-- ===== HEADER ===== -->
 <header class="site-header" role="banner">
+  <nav class="sticky-mobile-cta" aria-label="Schnellkontakt (im Header auf Mobile)">
+    <a class="smcall" href="tel:+4915734405927" aria-label="Jetzt anrufen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span>Jetzt anrufen</span>
+    </a>
+    <a class="smwa" href="https://wa.me/4915734405927?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eine%20Gartenpflege.%20K%C3%B6nnen%20Sie%20mich%20kurz%20beraten%3F" rel="noopener" aria-label="WhatsApp schreiben">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      <span>WhatsApp</span>
+    </a>
+  </nav>
   <div class="wrap">
     <nav class="nav" aria-label="Hauptnavigation">
       <a href="#top" class="brand" itemprop="name" aria-label="Gartenpflege Buzhala Startseite">
@@ -1810,7 +1847,7 @@
               <a class="nav-cta nav-cta-mobil" href="https://wa.me/4915734405927?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20eine%20Gartenpflege.%20K%C3%B6nnen%20Sie%20mich%20kurz%20beraten%3F" target="_blank" rel="noopener" aria-label="WhatsApp-Nachricht an 01573 4405927 senden" itemprop="telephone">
                         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
                         <span class="cta-num">01573&nbsp;4405927</span>
-                      </a><a class="nav-cta-fest" href="tel:+499****7534" aria-label="Festnetz: 09345 927534" itemprop="telephone">
+                      </a><a class="nav-cta-fest" href="tel:+499345927534" aria-label="Festnetz: 09345 927534" itemprop="telephone">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                 <span class="cta-num">09345&nbsp;927534</span>
               </a>
@@ -1837,7 +1874,7 @@
         <h1>Gartenpflege in <span class="turkis">Külsheim</span> &amp; Main-Tauber-Kreis — <span class="turkis">seit über 25 Jahren</span> in besten Händen.</h1>
         <p class="hero-sub">Gartenpflege in <strong>Külsheim, Tauberbischofsheim, Wertheim &amp; Main-Tauber-Kreis</strong>. <strong>Festpreis auf Anfrage</strong> — kostenlose Vor-Ort-Beratung, meist noch am selben Tag.</p>
         <div class="hero-ctas">
-          <a class="btn btn-primary btn-large" href="tel:+491****5927" itemprop="telephone">
+          <a class="btn btn-primary btn-large" href="tel:+4915734405927" itemprop="telephone">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             <span class="btn-label">Jetzt anrufen</span>
             <span class="btn-sub">01573 4405927</span>
@@ -1892,16 +1929,16 @@
       <h2>Unsere Arbeit — direkt aus der Region.</h2>
     </div>
     <div class="projects-grid">
-      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p01-vorher.jpg" alt="Vorher 1" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p01-nachher.jpg" alt="Nachher 1" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
-      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p02-vorher.jpg" alt="Vorher 2" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p02-nachher.jpg" alt="Nachher 2" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
-      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p10-vorher.jpg" alt="Vorher 10" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p10-nachher.jpg" alt="Nachher 10" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
-      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p03-vorher.jpg" alt="Vorher 3" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p03-nachher.jpg" alt="Nachher 3" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
-      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p04-vorher.jpg" alt="Vorher 4" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p04-nachher.jpg" alt="Nachher 4" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
-      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p05-vorher.jpg" alt="Vorher 5" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p05-nachher.jpg" alt="Nachher 5" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
-      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p06-vorher.jpg" alt="Vorher 6" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p06-nachher.jpg" alt="Nachher 6" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
-      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p07-vorher.jpg" alt="Vorher 7" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p07-nachher.jpg" alt="Nachher 7" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
-      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p08-vorher.jpg" alt="Vorher 8" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p08-nachher.jpg" alt="Nachher 8" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
-      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p09-vorher.jpg" alt="Vorher 9" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p09-nachher.jpg" alt="Nachher 9" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
+      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p01-vorher.jpg" alt="Hecke verwildert vor dem Rückschnitt durch Gartenpflege Buzhala aus Külsheim" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p01-nachher.jpg" alt="Hecke fachgerecht geschnitten nach der Pflege durch Gartenpflege Buzhala" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
+      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p02-vorher.jpg" alt="Verwilderter Garten vor der Neugestaltung – Gartenpflege Main-Tauber-Kreis" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p02-nachher.jpg" alt="Gepflegter Garten nach professioneller Gartenarbeit von Buzhala" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
+      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p10-vorher.jpg" alt="Wilder Garten vor der Komplettsanierung – Gartenpflege Main-Tauber-Kreis" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p10-nachher.jpg" alt="Komplett sanierter Garten nach Gartenneuanlage durch Gartenpflege Buzhala" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
+      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p03-vorher.jpg" alt="Überwucherter Rasen vor der Rasenpflege durch Gartenpflege Buzhala" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p03-nachher.jpg" alt="Sattgrüner Rasen nach Rasenpflege in Külsheim-Hundheim" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
+      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p04-vorher.jpg" alt="Formschnitt-Hecke vor dem Rückschnitt – Gartenpflege aus Main-Tauber-Kreis" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p04-nachher.jpg" alt="Formschnitt-Hecke nach fachgerechtem Schnitt durch Gartenpflege Buzhala" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
+      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p05-vorher.jpg" alt="Ungepflegte Hecke vor der Heckenpflege – Gartenpflege Külsheim" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p05-nachher.jpg" alt="Sauber geschnittene Hecke nach Heckenpflege durch Gartenpflege Buzhala" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
+      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p06-vorher.jpg" alt="Verwahrloster Garten vor der Grundstückspflege – Main-Tauber-Kreis" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p06-nachher.jpg" alt="Gepflegtes Grundstück nach Grundstückspflege durch Gartenpflege Buzhala" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
+      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p07-vorher.jpg" alt="Überwucherte Beete vor der Beetpflege – Gartenpflege Külsheim-Hundheim" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p07-nachher.jpg" alt="Saubere Beete nach Beetpflege durch Gartenpflege Buzhala" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
+      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p08-vorher.jpg" alt="Verwilderter Vorgarten vor der Gartenpflege – Main-Tauber-Kreis" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p08-nachher.jpg" alt="Pflegeleichter Vorgarten nach Gartenarbeit von Gartenpflege Buzhala" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
+      <div class="project-card"><div class="vn-wrap" data-vn><img class="vn-img vn-photo" src="images/vorher-nachher/p09-vorher.jpg" alt="Ungepflegter Baumbestand vor dem Baumschnitt – Gartenpflege Külsheim" width="1200" height="900" loading="lazy" /><img class="vn-img vn-photo vn-after" src="images/vorher-nachher/p09-nachher.jpg" alt="Gepflegte Bäume nach professionellem Baumschnitt durch Gartenpflege Buzhala" width="1200" height="900" loading="lazy" /><span class="vn-label vn-label-before">Vorher</span><span class="vn-label vn-label-after">Nachher</span><div class="vn-handle"><div class="vn-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div></div></div></div>
     </div>
   </div>
 </section>
@@ -1946,7 +1983,7 @@
       <div class="about-visual">
         <img
           src="https://media.cylex.de/companies/1374/5110/logo/logo.jpg"
-          alt="Buzhala — Gartenpflege & Service"
+          alt="Gartenpflege Buzhala – Garten- und Landschaftspflege in Külsheim, Main-Tauber-Kreis"
           width="250" height="165"
           loading="lazy" />
       </div>
@@ -2005,13 +2042,15 @@
 </div>
 <div class="testi-summary">
       <strong>10 echte Bewertungen</strong> aus Google (4,8 ⭐ · 6 Reviews) und Cylex (5,0 ⭐ · 4 Reviews) — alle Bewertungstexte stammen 1:1 von den Original-Plattformen.
+      <span class="testi-timestamp">Stand: 19. September 2026 — letzte manuelle Aktualisierung</span>
     </div>
     <div class="testi-grid">
 
       <!-- ========== GOOGLE-BEWERTUNGEN (6) ========== -->
+      <h3 class="testi-source-heading"><span class="src-icon">📍</span> Google-Bewertungen <span class="src-meta">4,8 ★ · 6 Reviews</span></h3>
 
       <!-- 1. Dennis Gundelsweiler -->
-      <a class="testi-card testi-link" href="https://share.google/Z2Dq88Pg91bKDEviH" target="_blank" rel="noopener" aria-label="Bewertung auf Google öffnen">
+      <article class="testi-card">
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">„Sehr professionell, wissen was sie tun 👌. Auch sehr freundlich und sehr schnell. Sie haben auch alles super sauber gemacht und auch alles aber wirklich ALLES mitgenommen. Kann ich nur weiter empfehlen 🪴🌳👍🏻"</p>
         <div class="testi-author">
@@ -2022,10 +2061,10 @@
             <span class="verified">✓ Google · vor 4 Jahren</span>
           </div>
         </div>
-      </a>
+      </article>
 
       <!-- 2. Dietmar Laumer -->
-      <a class="testi-card testi-link" href="https://share.google/Z2Dq88Pg91bKDEviH" target="_blank" rel="noopener" aria-label="Bewertung auf Google öffnen">
+      <article class="testi-card">
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">„Firma Buzhala hat bei uns vor 3 Wochen Rollrasen verlegt, immer freundlich, immer pünktlich und vor allem tolles Ergebnis! Immer wieder!"</p>
         <div class="testi-author">
@@ -2036,10 +2075,10 @@
             <span class="verified">✓ Google · vor 5 Jahren</span>
           </div>
         </div>
-      </a>
+      </article>
 
       <!-- 3. K. (Local Guide) — 4 Sterne, Grund für 4,8-Schnitt -->
-      <a class="testi-card honest testi-link" href="https://share.google/Z2Dq88Pg91bKDEviH" target="_blank" rel="noopener" aria-label="Bewertung auf Google öffnen">
+      <article class="testi-card honest">
         <div class="testi-stars">★★★★☆</div>
         <p class="testi-text">„Netter und gut arbeitender Kleinunternehmer."</p>
         <div class="testi-author">
@@ -2050,10 +2089,10 @@
             <span class="verified">✓ Google · vor 2 Jahren</span>
           </div>
         </div>
-      </a>
+      </article>
 
       <!-- 4. Claudia Maser -->
-      <a class="testi-card testi-link" href="https://share.google/Z2Dq88Pg91bKDEviH" target="_blank" rel="noopener" aria-label="Bewertung auf Google öffnen">
+      <article class="testi-card">
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">„Alles super, immer gerne ⭐⭐⭐⭐⭐"</p>
         <div class="testi-author">
@@ -2064,10 +2103,10 @@
             <span class="verified">✓ Google · vor 4 Jahren</span>
           </div>
         </div>
-      </a>
+      </article>
 
       <!-- 5. Josef Botta -->
-      <a class="testi-card testi-link" href="https://share.google/Z2Dq88Pg91bKDEviH" target="_blank" rel="noopener" aria-label="Bewertung auf Google öffnen">
+      <article class="testi-card">
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">„Sehr Gut."</p>
         <div class="testi-author">
@@ -2078,10 +2117,10 @@
             <span class="verified">✓ Google · vor 3 Jahren</span>
           </div>
         </div>
-      </a>
+      </article>
 
       <!-- 6. Senat -->
-      <a class="testi-card testi-link" href="https://share.google/Z2Dq88Pg91bKDEviH" target="_blank" rel="noopener" aria-label="Bewertung auf Google öffnen">
+      <article class="testi-card">
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">„Positiv: Ansprechbarkeit, Pünktlichkeit, Qualität, Professionalität, Wert."</p>
         <div class="testi-author">
@@ -2092,12 +2131,13 @@
             <span class="verified">✓ Google · vor 3 Jahren</span>
           </div>
         </div>
-      </a>
+      </article>
 
       <!-- ========== CYLEX-BEWERTUNGEN (4) ========== -->
+      <h3 class="testi-source-heading"><span class="src-icon">📋</span> Cylex-Bewertungen <span class="src-meta">5,0 ★ · 4 Reviews</span></h3>
 
       <!-- 7. Klaus B. -->
-      <a class="testi-card testi-link" href="https://web2.cylex.de/firma-home/gartenpflege-buzhala-13745110.html" target="_blank" rel="noopener" aria-label="Bewertung auf Cylex öffnen">
+      <article class="testi-card">
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">„Im letzten Jahr mit Hebebühne Ahorn zurück geschnitten, altes Gartengelände eingeebnet, dabei Rabatten und Wurzelstöcke ausgegraben, Gelände neu eingesät — alles sauber entsorgt. Dieses Jahr Rasen und Hecke geschnitten, Vorgarten ausgegrast, Büsche zurück geschnitten und Rindenmulch aufgebracht. Saubere Arbeit — sehr zufrieden, kann Fa. Buzhala zu 100% weiterempfehlen."</p>
         <div class="testi-author">
@@ -2108,10 +2148,10 @@
             <span class="verified">✓ Cylex · August 2025</span>
           </div>
         </div>
-      </a>
+      </article>
 
       <!-- 8. Heinz Eisert -->
-      <a class="testi-card testi-link" href="https://web2.cylex.de/firma-home/gartenpflege-buzhala-13745110.html" target="_blank" rel="noopener" aria-label="Bewertung auf Cylex öffnen">
+      <article class="testi-card">
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">„Es wird sehr gründlich und auch flink gearbeitet. Einmal in die notwendigen Arbeiten eingewiesen läuft es wie automatisch! Auch korrekte Entsorgung der Gartenabfälle wird gewissenhaft und selbstredend übernommen. Alles wird ‚besenrein‘ hinterlassen. Eine Gartenpflege wie man sie sich im Idealfall vorstellt — und hier real ist!"</p>
         <div class="testi-author">
@@ -2122,10 +2162,10 @@
             <span class="verified">✓ Cylex · Februar 2025</span>
           </div>
         </div>
-      </a>
+      </article>
 
       <!-- 9. Hans & Birgit Winkler -->
-      <a class="testi-card testi-link" href="https://web2.cylex.de/firma-home/gartenpflege-buzhala-13745110.html" target="_blank" rel="noopener" aria-label="Bewertung auf Cylex öffnen">
+      <article class="testi-card">
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">„Der Chef mit seinen zwei Neffen hat heute bei uns Hecken geschnitten und gekürzt. Sehr freundlich, pünktlich, schnelle und saubere Arbeit und allen Abfall weggeräumt. Hier stimmt auch Preis-Leistungsverhältnis, sehr zu empfehlen. Wir werden uns bei Bedarf immer wieder an diese Firma wenden, vor allem, weil sie keine lange Anfahrt haben."</p>
         <div class="testi-author">
@@ -2136,10 +2176,10 @@
             <span class="verified">✓ Cylex · vor 2 Jahren</span>
           </div>
         </div>
-      </a>
+      </article>
 
       <!-- 10. Dietmar Laumer (Cylex) -->
-      <a class="testi-card testi-link" href="https://web2.cylex.de/firma-home/gartenpflege-buzhala-13745110.html" target="_blank" rel="noopener" aria-label="Bewertung auf Cylex öffnen">
+      <article class="testi-card">
         <div class="testi-stars">★★★★★</div>
         <p class="testi-text">„Bei uns hat Firma Buzhala Rollrasen verlegt! Atolle Arbeit, immer freundlich, immer pünktlich und vor allem tolles Ergebnis! Immer wieder!"</p>
         <div class="testi-author">
@@ -2150,12 +2190,16 @@
             <span class="verified">✓ Cylex · vor 5 Jahren</span>
           </div>
         </div>
-      </a>
+      </article>
 
     </div>
     <div style="text-align: center; margin-top: 36px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-      <a href="https://www.google.com/search?client=ms-android-xiaomi-terr2-rso2&hs=UMRV&sca_esv=0d642a333c7f7a40&sxsrf=APpeQnsceepDb8ZiwZ8NNUdJXy8waKKE5w:1781892790757&q=gartenpflege+buzhala+rezensionen&ludocid=339213480203874448&ibp=gwp;0,7&hl=de-DE&sa=X&ved=2ahUKEwiZmcj285OVAxVUR_EDHcQ4D4YQ9fQKegUIgwEQBg&biw=406&bih=792&dpr=3#lkt=LocalPoiReviews&lpg=cid:CgIgAQ%3D%3D" rel="noopener" target="_blank" class="btn btn-secondary">📍 Alle 6 Google-Bewertungen ansehen →</a>
-      <a href="https://web2.cylex.de/firma-home/gartenpflege-buzhala-13745110.html" rel="noopener" target="_blank" class="btn btn-secondary">📋 Alle 4 Cylex-Bewertungen ansehen →</a>
+
+      <div class="testi-cta-row"><a href="https://www.google.com/maps/place/Gartenpflege+Buzhala/@49.6907669,9.4647719,703m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47a2a95d9efbb1cf:0x4b520dcee937090!8m2!3d49.6907669!4d9.4647719!16s%2Fg%2F11h90k26bt#reviews" target="_blank" rel="noopener" class="btn btn-secondary">📍 Alle 6 Google-Bewertungen auf Google Maps ansehen →</a></div>
+
+
+      <div class="testi-cta-row"><a href="https://web2.cylex.de/firma-home/gartenpflege-buzhala-13745110.html" target="_blank" rel="noopener" class="btn btn-secondary">📋 Alle 4 Cylex-Bewertungen ansehen →</a></div>
+
     </div>
   </div>
 </section>
@@ -2184,7 +2228,7 @@
         </summary>
         <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
           <p itemprop="text">Wir arbeiten ausschließlich mit <strong>Festpreis auf Anfrage</strong> — nach kostenloser Vor-Ort-Beratung erhalten Sie ein verbindliches, schriftliches Angebot. Als grobe Orientierung: ein typischer Heckenschnitt für eine 25-Meter-Hecke liegt erfahrungsgemäß <strong>ab ca. 80&nbsp;€</strong>. Der konkrete Preis hängt von Größe, Zustand und Leistungsumfang ab.</p>
-          <p class="cite">Quelle: <cite>Gartenpflege &amp; Service Buzhala · Preis-Leitfaden 2026</cite> · Stand 02.07.2026</p>
+          <!-- Quelle-Zeile entfernt -->
         </div>
       </details>
 
@@ -2197,7 +2241,7 @@
         </summary>
         <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
           <p itemprop="text">Wir betreuen Gärten im gesamten <strong>Main-Tauber-Kreis</strong>: Külsheim, Tauberbischofsheim, Wertheim, Hardheim, Buchen, Walldürn, Boxberg, Lauda-Königshofen, Bad Mergentheim und Umgebung. Anfahrtskosten entfallen innerhalb dieses Hauptgebiets. Außerhalb? In Einzelfällen fahren wir auch weiter — rufen Sie einfach an, wir klären das persönlich.</p>
-          <p class="cite">Quelle: <cite>Main-Tauber-Kreis · Regierungsbezirk Karlsruhe, Baden-Württemberg</cite></p>
+          <!-- Quelle-Zeile entfernt -->
         </div>
       </details>
 
@@ -2337,7 +2381,7 @@
 
     <!-- Prominente Quick-Contact-Leiste (4 Tiles) -->
     <div class="contact-quickbar" role="navigation" aria-label="Schnellkontakt">
-      <a class="qc-tile qc-call" href="tel:+499****7534" itemprop="telephone" aria-label="Festnetz anrufen">
+      <a class="qc-tile qc-call" href="tel:+499345927534" itemprop="telephone" aria-label="Festnetz anrufen">
         <span class="qc-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </span>
@@ -2381,13 +2425,13 @@
         <p>Wir nehmen innerhalb der Öffnungszeiten in der Regel sofort ab — und wenn nicht, rufen wir noch am gleichen Tag zurück.</p>
         <ul class="contact-list">
           <li>
-            <a href="tel:+491****5927" itemprop="telephone">
+            <a href="tel:+4915734405927" itemprop="telephone">
               <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
               <div><span class="meta">Mobil · auch WhatsApp</span><span class="val">01573 4405927</span></div>
             </a>
           </li>
           <li>
-            <a href="tel:+499****7534" itemprop="telephone">
+            <a href="tel:+499345927534" itemprop="telephone">
               <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
               <div><span class="meta">Festnetz · Mo–Fr 8–18, Sa 8–14</span><span class="val">09345 927534</span></div>
             </a>
@@ -2418,7 +2462,9 @@
       </div>
 
       <!-- Rechts: Formular -->
-      <form class="contact-form" name="anfrage" novalidate>
+      <form class="contact-form" name="anfrage" id="contact-form" novalidate>
+        <input type="hidden" name="subject" value="Neue Anfrage über gartenpflegeservicebuzhala.de" />
+        <div id="contact-form-status" class="contact-form-status" hidden></div>
         <span class="form-eyebrow">Schriftliche Anfrage</span>
         <h3>Festpreis-Angebot kostenlos anfordern</h3>
         <label for="name">Ihr Name</label>
@@ -2510,8 +2556,8 @@
       <div>
         <h5>Kontakt</h5>
         <ul>
-          <li><a href="tel:+499****7534" itemprop="telephone">09345 927534</a> · Festnetz</li>
-          <li><a href="tel:+491****5927">01573 4405927</a> · Mobil &amp; WhatsApp</li>
+          <li><a href="tel:+499345927534" itemprop="telephone">09345 927534</a> · Festnetz</li>
+          <li><a href="tel:+4915734405927">01573 4405927</a> · Mobil &amp; WhatsApp</li>
           <li><a href="mailto:gartenpflegebuzhala@gmail.com">E-Mail schreiben</a></li>
           <li><a href="https://www.tiktok.com/@gartenpflegebuzhala1" target="_blank" rel="noopener">TikTok</a></li>
           <li>Miltenberger Str. 14</li>
@@ -2629,6 +2675,98 @@
     });
   })();
 </script>
+<script>
+/* Mobile-Fix für .about-grid — JS-Fallback weil CSS-Media-Query im Browser sporadisch nicht greift (Cache-Edge-Case bei Cloudflare-Pages) */
+(function(){
+  function fixMobile(){
+    if (window.matchMedia && window.matchMedia('(max-width: 960px)').matches) {
+      document.querySelectorAll('.about-grid').forEach(function(el){
+        el.style.setProperty('grid-template-columns', '1fr', 'important');
+        el.style.setProperty('gap', '32px', 'important');
+      });
+      document.querySelectorAll('.about-visual, .about-content').forEach(function(el){
+        el.style.setProperty('width', '100%', 'important');
+        el.style.setProperty('max-width', '100%', 'important');
+        el.style.setProperty('padding-left', '0', 'important');
+        el.style.setProperty('padding-right', '0', 'important');
+      });
+    }
+  }
+  fixMobile();
+  document.addEventListener('DOMContentLoaded', fixMobile);
+  window.addEventListener('resize', fixMobile);
+})();
+</script>
+<script>
+/* Sticky-Mobile-CTA Visibility-Fix — Browser-Cache-Edge-Case bei Cloudflare-Pages ignoriert Media-Query */
+(function(){
+  function fixStickyCta(){
+    var bars = document.querySelectorAll('.sticky-mobile-cta');
+    bars.forEach(function(bar){
+      if (window.innerWidth <= 720) {
+        bar.style.setProperty('display', 'flex', 'important');
+      } else {
+        bar.style.setProperty('display', 'none', 'important');
+        bar.style.removeProperty('position');
+        bar.style.removeProperty('top');
+        bar.style.removeProperty('left');
+        bar.style.removeProperty('right');
+      }
+    });
+  }
+  fixStickyCta();
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fixStickyCta);
+  window.addEventListener('resize', fixStickyCta);
+})();
+</script>
 
+<script>
+/* Contact-Form: sendet via Cloudflare Worker */
+(function(){
+  var form = document.getElementById("contact-form");
+  if (!form) return;
+  var status = document.getElementById("contact-form-status");
+  var submitBtn = form.querySelector("button[type=submit], button:not([type])");
+  var WORKER_URL = "https://buzhala-contact.buzhala-contact-worker.workers.dev/";
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      status.hidden = false;
+      status.className = "contact-form-status status-error";
+      status.textContent = "Bitte füllen Sie alle Pflichtfelder aus.";
+      return;
+    }
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Wird gesendet …"; }
+    status.hidden = true;
+    var formData = new FormData(form);
+    fetch(WORKER_URL, {
+      method: "POST",
+      body: formData,
+      headers: { "Accept": "application/json" }
+    })
+    .then(function(r){ return r.json().then(function(j){ return { ok: r.ok, j: j }; }); })
+    .then(function(res){
+      if (res.ok && res.j.ok) {
+        status.hidden = false;
+        status.className = "contact-form-status status-ok";
+        status.innerHTML = '<strong>✓ Vielen Dank!</strong> Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden. <br><small>Bei Eile: <a href="tel:+4915734405927">01573 4405927</a> (WhatsApp)</small>';
+        form.reset();
+      } else {
+        var msg = (res.j && (res.j.message || res.j.error)) || "Unbekannter Fehler";
+        throw new Error(msg);
+      }
+    })
+    .catch(function(err){
+      status.hidden = false;
+      status.className = "contact-form-status status-error";
+      status.innerHTML = "<strong>Fehler:</strong> " + (err.message || "Mail konnte nicht gesendet werden.") + " <br><small>Bitte rufen Sie uns direkt an: <a href=\"tel:+4915734405927\">01573 4405927</a></small>";
+    })
+    .finally(function(){
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Anfrage senden — kostenlos & unverbindlich"; }
+    });
+  });
+})();
+</script>
 </body>
 </html>
