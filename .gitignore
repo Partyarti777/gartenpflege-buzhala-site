@@ -33,3 +33,7 @@ skills-lock.json
 
 # Screenshots (Dev-Artefakte)
 .screenshots/
+
+# Wrangler-TOML enthaelt Secrets (RESEND_API_KEY etc.) — nicht committen
+workers/contact/wrangler.toml
+workers/reviews/wrangler.toml
