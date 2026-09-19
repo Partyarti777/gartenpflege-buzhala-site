@@ -115,7 +115,13 @@ export default {
         status: 400, headers: corsHeaders,
       });
     }
-    if (!phone || !isValidPhone(phone)) {
+    // Mindestens Telefon ODER E-Mail muss angegeben werden (sonst kann ich nicht antworten)
+    if (!phone && !email) {
+      return new Response(JSON.stringify({ error: 'missing_contact', message: 'Bitte Telefon ODER E-Mail angeben, damit wir antworten koennen.' }), {
+        status: 400, headers: corsHeaders,
+      });
+    }
+    if (phone && !isValidPhone(phone)) {
       return new Response(JSON.stringify({ error: 'invalid_phone' }), {
         status: 400, headers: corsHeaders,
       });
@@ -166,36 +172,36 @@ IP (anonymisiert): ${(request.headers.get('CF-Connecting-IP') || 'unknown').slic
 Land: ${request.cf?.country || 'unknown'}
     `;
 
-    // Mail via MailChannels senden (Cloudflare's eingebauter SMTP-Relay)
+    // Mail via Resend.com senden (kostenlos, EU-zuverlaessig)
     try {
-      const mailRes = await fetch('https://api.mailchannels.net/tx/v1/send', {
+      const mailRes = await fetch('https://api.resend.com/emails', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Authorization': 'Bearer ' + env.RESEND_API_KEY,
+          'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
-          personalizations: [
-            {
-              to: [{ email: env.DESTINATION_EMAIL, name: 'Gartenpflege Buzhala' }],
-            },
-          ],
-          from: { email: env.FROM_EMAIL, name: 'Gartenpflege Buzhala Kontaktformular' },
+          from: 'Gartenpflege Buzhala <' + env.FROM_EMAIL + '>',
+          to: [env.DESTINATION_EMAIL],
+          reply_to: env.REPLY_TO || env.DESTINATION_EMAIL,
           subject,
-          content: [
-            { type: 'text/plain', value: text },
-            { type: 'text/html', value: html },
-          ],
-        }),
+          text,
+          html
+        })
       });
 
       if (!mailRes.ok) {
         const errText = await mailRes.text();
-        console.error(`MailChannels error ${mailRes.status}: ${errText}`);
+        console.error(`Resend error ${mailRes.status}: ${errText}`);
         return new Response(
-          JSON.stringify({ error: 'mail_failed', status: mailRes.status }),
+          JSON.stringify({ error: 'mail_failed', status: mailRes.status, detail: errText }),
           { status: 502, headers: corsHeaders },
         );
       }
+      const result = await mailRes.json();
+      console.log('Mail sent via Resend, id:', result.id);
     } catch (e) {
-      console.error(`MailChannels exception: ${e.message}`);
+      console.error(`Resend exception: ${e.message}`);
       return new Response(
         JSON.stringify({ error: 'mail_exception', message: e.message }),
         { status: 502, headers: corsHeaders },
