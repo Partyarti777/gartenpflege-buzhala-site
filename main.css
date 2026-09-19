@@ -98,6 +98,8 @@
   margin-bottom: 44px;
 }
 .footer-brand .brand { color: white; }
+.footer-brand .brand-text { color: white; }
+.footer-brand .brand-text .small { color: rgba(255,255,255,0.7); }
 .footer-brand .brand-mark {
   background: white;
   color: var(--primary-darker);
