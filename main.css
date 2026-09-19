@@ -60,6 +60,12 @@
 .nav-cta:hover { background: var(--primary-dark); transform: translateY(-1px); text-decoration: none; }
 .nav-cta svg { width: 16px; height: 16px; }
 .nav-cta-group { display: inline-flex; align-items: center; gap: 8px; }
+.nav-phone-list { display: inline-flex; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--ink-soft); }
+.nav-phone-list .nav-phone-link { color: var(--ink); text-decoration: none; font-weight: 500; }
+.nav-phone-list .nav-phone-link:hover { color: var(--primary-dark); text-decoration: underline; }
+.nav-phone-list .nav-phone-link strong { color: var(--primary-dark); font-weight: 700; }
+.nav-phone-list .nav-phone-sep { color: var(--line); }
+@media (max-width: 960px) { .nav-phone-list { display: none; } }
 .nav-cta-mobil {
   background: #128C7E; font-size: 0.92rem; font-weight: 700;
 }
