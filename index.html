@@ -1420,9 +1420,12 @@
   .cookie-actions .btn-primary { background: var(--primary); color: white; }
   .cookie-actions .btn-primary:hover { background: var(--primary-dark); color: white; }
   @media (max-width: 600px) {
-    .cookie-banner { left: 8px; right: 8px; bottom: 8px; padding: 16px 18px; }
-    .cookie-actions { width: 100%; }
-    .cookie-actions .btn { flex: 1 1 0; }
+    .cookie-banner { left: 8px; right: 8px; bottom: 8px; padding: 12px 14px; border-radius: 14px; }
+    .cookie-text strong { font-size: 0.95rem; margin-bottom: 3px; }
+    .cookie-text p { font-size: 0.82rem; line-height: 1.4; }
+    .cookie-actions { width: 100%; gap: 4px; }
+    .cookie-actions .btn { flex: 1 1 0; padding: 9px 12px; font-size: 0.85rem; }
+    .cookie-actions .cookie-link { padding: 9px 10px; font-size: 0.82rem; }
   }
 
   /* Cookie-Modal */
@@ -1610,8 +1613,8 @@
     /* Map-info: addresses text breathing room tighter */
     .map-info .hours li { padding: 5px 0; font-size: 0.92rem; }
     /* Body bottom padding so sticky CTA does not cover last content */
-    body { padding-bottom: 76px !important; }
-    body.has-cookie-banner { padding-bottom: 200px !important; }
+    body { padding-bottom: calc(76px + env(safe-area-inset-bottom, 0)) !important; }
+    body.has-cookie-banner { padding-bottom: calc(180px + env(safe-area-inset-bottom, 0)) !important; }
   }
 
   /* ========== STICKY MOBILE CTA ========== */
@@ -1623,8 +1626,8 @@
       display: flex;
       position: fixed;
       left: 10px; right: 10px;
-      bottom: 10px;
-      z-index: 60;
+      bottom: calc(10px + env(safe-area-inset-bottom, 0));
+      z-index: 220;
       gap: 8px;
       padding: 0;
       pointer-events: none; /* let buttons capture, wrapper transparent */
@@ -1657,7 +1660,7 @@
     }
     .sticky-mobile-cta a svg { width: 20px; height: 20px; flex-shrink: 0; }
     .sticky-mobile-cta a:hover { transform: translateY(-1px); }
-    body.has-cookie-banner .sticky-mobile-cta { bottom: 180px; }
+    body.has-cookie-banner .sticky-mobile-cta { bottom: calc(110px + env(safe-area-inset-bottom, 0)); }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
@@ -2159,68 +2162,7 @@
 
 
 
-<!-- ===== EINSATZGEBIET ===== -->
-<section id="gebiet">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow"><span class="dot"></span> Einsatzgebiet</span>
-      <h2>In welchem Gebiet ist Gartenpflege Buzhala tätig?</h2>
-      <p>Von unserem Standort in Külsheim-Hundheim aus betreuen wir Privatkunden, Hausverwaltungen und Gewerbe in der gesamten Region — Festpreis-Angebot ohne Anfahrt für alle genannten Orte.</p>
-    </div>
-    <div class="area-grid-new">
-      <div class="area-card-new area-card-featured">
-        <span class="area-tag">Standort</span>
-        <strong>Külsheim &amp; Stadtteile</strong>
-        <span class="area-meta">Miltenberger Str. 14 · 97900 Külsheim-Hundheim</span>
-      </div>
-      <div class="area-card-new">
-        <strong>Tauberbischofsheim</strong>
-        <span class="area-meta">Main-Tauber-Kreis</span>
-      </div>
-      <div class="area-card-new">
-        <strong>Wertheim</strong>
-        <span class="area-meta">Main-Tauber-Kreis</span>
-      </div>
-      <div class="area-card-new">
-        <strong>Hardheim</strong>
-        <span class="area-meta">Neckar-Odenwald-Kreis</span>
-      </div>
-      <div class="area-card-new">
-        <strong>Buchen (Odenwald)</strong>
-        <span class="area-meta">Neckar-Odenwald-Kreis</span>
-      </div>
-      <div class="area-card-new">
-        <strong>Walldürn</strong>
-        <span class="area-meta">Neckar-Odenwald-Kreis</span>
-      </div>
-      <div class="area-card-new">
-        <strong>Boxberg</strong>
-        <span class="area-meta">Main-Tauber-Kreis</span>
-      </div>
-      <div class="area-card-new">
-        <strong>Lauda-Königshofen</strong>
-        <span class="area-meta">Main-Tauber-Kreis</span>
-      </div>
-      <div class="area-card-new">
-        <strong>Bad Mergentheim</strong>
-        <span class="area-meta">Main-Tauber-Kreis</span>
-      </div>
-      <div class="area-card-new">
-        <strong>Miltenberg</strong>
-        <span class="area-meta">Landkreis Miltenberg (BY)</span>
-      </div>
-      <div class="area-card-new">
-        <strong>Freudenberg</strong>
-        <span class="area-meta">Main-Tauber-Kreis</span>
-      </div>
-      <div class="area-card-new">
-        <strong>Königheim</strong>
-        <span class="area-meta">Main-Tauber-Kreis</span>
-      </div>
-    </div>
-    <p class="area-footer">Außerhalb? Fragen Sie einfach telefonisch — Einzelfälle sind möglich.</p>
-  </div>
-</section>
+<!-- ===== EINSATZGEBIET ENTFERNT (war Sektion 6, jetzt via FAQ #02 abgedeckt) ===== -->
 
 <!-- ===== FAQ (GEO-optimiert) ===== -->
 <!-- ===== FAQ (GEO-optimiert: Accordion, zitierbare Definitionen) ===== -->
@@ -2236,7 +2178,7 @@
       <!-- FAQ 1 — Preise -->
       <details class="faq-item" open>
         <summary>
-          <span class="q-num">01</span>
+          <span class="q-num">1.</span>
           <span class="q-text">Was kostet Gartenpflege bei Buzhala?</span>
           <span class="q-icon" aria-hidden="true"></span>
         </summary>
@@ -2249,7 +2191,7 @@
       <!-- FAQ 2 — Einzugsgebiet -->
       <details class="faq-item">
         <summary>
-          <span class="q-num">02</span>
+          <span class="q-num">2.</span>
           <span class="q-text">In welchem Gebiet sind Sie tätig?</span>
           <span class="q-icon" aria-hidden="true"></span>
         </summary>
@@ -2262,7 +2204,7 @@
       <!-- FAQ 3 — Vor-Ort-Beratung -->
       <details class="faq-item">
         <summary>
-          <span class="q-num">03</span>
+          <span class="q-num">3.</span>
           <span class="q-text">Bieten Sie kostenlose Vor-Ort-Beratung an?</span>
           <span class="q-icon" aria-hidden="true"></span>
         </summary>
@@ -2274,7 +2216,7 @@
       <!-- FAQ 4 — Termine -->
       <details class="faq-item">
         <summary>
-          <span class="q-num">04</span>
+          <span class="q-num">4.</span>
           <span class="q-text">Wie schnell bekomme ich einen Termin?</span>
           <span class="q-icon" aria-hidden="true"></span>
         </summary>
@@ -2286,7 +2228,7 @@
       <!-- FAQ 5 — Geschichte -->
       <details class="faq-item">
         <summary>
-          <span class="q-num">05</span>
+          <span class="q-num">5.</span>
           <span class="q-text">Seit wann gibt es Gartenpflege Buzhala?</span>
           <span class="q-icon" aria-hidden="true"></span>
         </summary>
@@ -2298,7 +2240,7 @@
       <!-- FAQ 6 — Gewerbe -->
       <details class="faq-item">
         <summary>
-          <span class="q-num">06</span>
+          <span class="q-num">6.</span>
           <span class="q-text">Arbeiten Sie auch für Hausverwaltungen oder Gewerbe?</span>
           <span class="q-icon" aria-hidden="true"></span>
         </summary>
@@ -2310,7 +2252,7 @@
       <!-- FAQ 7 — Zahlung -->
       <details class="faq-item">
         <summary>
-          <span class="q-num">07</span>
+          <span class="q-num">7.</span>
           <span class="q-text">Welche Zahlungsarten akzeptieren Sie?</span>
           <span class="q-icon" aria-hidden="true"></span>
         </summary>
@@ -2322,7 +2264,7 @@
       <!-- FAQ 8 — Wetter -->
       <details class="faq-item">
         <summary>
-          <span class="q-num">08</span>
+          <span class="q-num">8.</span>
           <span class="q-text">Was passiert, wenn das Wetter nicht mitspielt?</span>
           <span class="q-icon" aria-hidden="true"></span>
         </summary>
