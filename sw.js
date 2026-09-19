@@ -1,6 +1,6 @@
 // Service Worker für gartenpflege-service-buzhala.de
 // Cache-First-Strategie für Statics, Network-First für HTML
-const CACHE_VERSION = 'buzhala-v1';
+const CACHE_VERSION = 'buzhala-v2';
 const PRECACHE_URLS = [
   '/',
   '/index.html',

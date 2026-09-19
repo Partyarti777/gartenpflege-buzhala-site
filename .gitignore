@@ -37,3 +37,6 @@ skills-lock.json
 # Wrangler-TOML enthaelt Secrets (RESEND_API_KEY etc.) — nicht committen
 workers/contact/wrangler.toml
 workers/reviews/wrangler.toml
+
+# Original-große Video-Backups (vom 2026-09-20 PSI-Audit, lokal gehalten)
+videos/**/*-original-*.mp4

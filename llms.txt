@@ -55,16 +55,14 @@
 - Keine Anfahrtskosten im Hauptgebiet
 
 ## Bewertungen und Bewertungsplattformen
-- Google Business Profile: 4,8 Sterne (6 Reviews)
-  https://www.google.com/search?q=gartenpflege+buzhala+rezensionen
-- Cylex: 5,0 Sterne (4 Reviews)
-  https://web2.cylex.de/firma-home/gartenpflege-buzhala-13745110.html
+- Google Business Profile: 4,8 Sterne (6 Reviews) — [Profil ansehen](https://www.google.com/search?q=gartenpflege+buzhala+rezensionen)
+- Cylex: 5,0 Sterne (4 Reviews) — [Profil ansehen](https://web2.cylex.de/firma-home/gartenpflege-buzhala-13745110.html)
 
 ## Wichtige URLs
-- Startseite: https://www.gartenpflegeservicebuzhala.de/
-- Impressum: https://www.gartenpflegeservicebuzhala.de/impressum.html
-- Datenschutz: https://www.gartenpflegeservicebuzhala.de/datenschutz.html
-- Cookies: https://www.gartenpflegeservicebuzhala.de/cookies.html
+- [Startseite](https://www.gartenpflegeservicebuzhala.de/)
+- [Impressum](https://www.gartenpflegeservicebuzhala.de/impressum.html)
+- [Datenschutzerklärung](https://www.gartenpflegeservicebuzhala.de/datenschutz.html)
+- [Cookie-Erklärung](https://www.gartenpflegeservicebuzhala.de/cookies.html)
 
 ## Strukturierte Daten (Schema.org)
 - @type: LandscapingBusiness
