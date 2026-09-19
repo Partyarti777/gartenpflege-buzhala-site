@@ -1,0 +1,32 @@
+# Local dev
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editors
+.vscode/
+.idea/
+*.iml
+
+# Cloudflare
+.wrangler/
+.dev.vars
+
+# Node (falls jemals ein Build-Step dazukommt)
+node_modules/
+package-lock.json
+
+# Backups & Working-Files
+*.bak
+*.bak-*
+*.tmp
+*.orig
+*.rej
+*-local.*
+
+# Agent-Tooling (User-Maschinen-State, nicht Projekt-Inhalt)
+.agents/
+.claude/
+skills-lock.json

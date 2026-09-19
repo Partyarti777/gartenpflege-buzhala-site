@@ -1,0 +1,38 @@
+# ============================================================
+# robots.txt · Gartenpflege Buzhala
+# Live-Domain: gartenpflegeservicebuzhala.de
+# ============================================================
+
+# Alle gängigen Crawler dürfen alles indexieren.
+User-agent: *
+Allow: /
+Disallow: /index.html.bak
+Disallow: /v1-broken.html
+
+# Sitemap-Pointer für Google, Bing, DuckDuckGo, etc.
+Sitemap: https://www.gartenpflegeservicebuzhala.de/sitemap.xml
+
+# Spezifische AI-Crawler explizit erlauben (für GEO/Citation-Readiness)
+# ChatGPT / OpenAI
+User-agent: GPTBot
+Allow: /
+
+# Anthropic Claude
+User-agent: ClaudeBot
+Allow: /
+
+# Common Crawl (trainings-Daten)
+User-agent: CCBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# Apple Applebot-Extended (für Apple Intelligence)
+User-agent: Applebot-Extended
+Allow: /
+
+# Google AI Overviews / Gemini
+User-agent: Google-Extended
+Allow: /
