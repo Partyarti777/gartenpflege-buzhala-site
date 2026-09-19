@@ -171,6 +171,7 @@
     line-height: 1.1;
   }
   .sticky-mobile-cta a.smcall { background: var(--primary); color: white; }
+  .sticky-mobile-cta a.smfest { background: var(--primary); color: white; }
   .sticky-mobile-cta a.smwa { background: #25D366; color: white; flex: 0 0 auto; padding: 14px 18px !important; }
   .sticky-mobile-cta a svg { width: 20px !important; height: 20px !important; flex-shrink: 0; }
   .sticky-mobile-cta a:hover { transform: translateY(-1px); }
