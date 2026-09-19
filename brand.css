@@ -1,3 +1,20 @@
+/* === SELF-HOSTED FONTS (DSGVO-konform, keine Google CDN) === */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2); }
+
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url(/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1pL7SUc.woff2); }
+
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2); }
+
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url(/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2pL7SUc.woff2); }
+
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/pxiEyp8kv8JHgFVrJJbecmNE.woff2); }
+
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url(/fonts/pxiByp8kv8JHgFVrLEj6Z11lFc-K.woff2); }
+
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url(/fonts/pxiByp8kv8JHgFVrLCz7Z11lFc-K.woff2); }
+
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 800; font-display: swap; src: url(/fonts/pxiByp8kv8JHgFVrLDD4Z11lFc-K.woff2); }
+
 /* ============================================================
    Gartenpflege Buzhala · Brand-Stylesheet (geteilte Tokens)
    Wird von index.html, impressum.html, datenschutz.html,
