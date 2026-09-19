@@ -2510,12 +2510,27 @@
               </div>
               <div class="map-grid">
                 <div class="map-card">
-                  <iframe
-                    title="Gartenpflege Buzhala — Karte"
-                    src="https://maps.google.com/maps?q=Miltenberger+Stra%C3%9Fe+14,+97900+K%C3%BClsheim&t=m&z=14&ie=UTF8&iwloc=&output=embed"
-                    style="border:0;"
-                    loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                    allowfullscreen></iframe>
+                  <div class="map-placeholder" data-src="https://maps.google.com/maps?q=Miltenberger+Stra%C3%9Fe+14,+97900+K%C3%BClsheim&t=m&z=14&ie=UTF8&iwloc=&output=embed" style="background:linear-gradient(135deg,#1f6b4a 0%,#0e442c 100%);min-height:380px;display:flex;align-items:center;justify-content:center;border-radius:14px;cursor:pointer;color:white;font-family:Poppins,sans-serif;text-align:center;padding:24px;" role="button" tabindex="0" aria-label="Karte laden - Google Maps">
+        <div>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;margin:0 auto 12px;display:block;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <strong style="font-size:1.1rem;">Karte anzeigen</strong><br>
+          <small style="opacity:0.85;">Beim Klick werden Daten an Google übertragen.<br>Siehe Datenschutzerklärung.</small>
+        </div>
+      </div>
+      <script>
+      document.querySelectorAll('.map-placeholder').forEach(function(el){
+        function loadMap(){
+          var s = el.getAttribute('data-src');
+          var f = document.createElement('iframe');
+          f.src = s; f.width = '100%'; f.height = '380';
+          f.style.border = '0'; f.setAttribute('allowfullscreen',''); f.setAttribute('loading','lazy');
+          f.setAttribute('referrerpolicy','no-referrer-when-downgrade');
+          el.parentNode.replaceChild(f, el);
+        }
+        el.addEventListener('click', loadMap);
+        el.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();loadMap();} });
+      });
+      </script>
                 </div>
                 <div class="map-info">
                   <h3>Adresse</h3>
@@ -2555,6 +2570,7 @@
           <li><a href="tel:+499345927534" itemprop="telephone">09345 927534</a> · Festnetz</li>
           <li><a href="tel:+4915734405927">01573 4405927</a> · Mobil &amp; WhatsApp</li>
           <li><a href="mailto:gartenpflegebuzhala@gmail.com">E-Mail schreiben</a></li>
+          <li><a href="https://www.instagram.com/gartenpflegebuzhala/" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://www.tiktok.com/@gartenpflegebuzhala1" target="_blank" rel="noopener">TikTok</a></li>
           <li>Miltenberger Str. 14</li>
           <li>97900 Külsheim-Hundheim</li>
