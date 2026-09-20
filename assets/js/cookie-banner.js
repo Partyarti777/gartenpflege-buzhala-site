@@ -29,7 +29,7 @@
     '<div id="cookie-settings-modal" class="cookie-settings-modal" role="dialog" aria-modal="true" aria-label="Cookie-Einstellungen" hidden>',
     '  <div class="cookie-settings-card">',
     '    <h3>Cookie-Einstellungen</h3>',
-    '    <p class="muted">Wählen Sie, welche Cookies Sie zulassen möchten. Sie können diese Auswahl jederzeit über den Link im Footer ändern.</p>',
+    '    <p class="muted">Wählen Sie, welche Cookies Sie zulassen möchten. Sie können diese Auswahl jederzeit über den Link im Footer ändern. Volle Details finden Sie in unserer <a href="cookies.html">Cookie-Richtlinie</a>.</p>',
     '    <div class="cookie-category required">',
     '      <div class="cat-meta"><strong>Notwendig</strong><span>immer aktiv</span></div>',
     '      <p>Erforderlich für Grundfunktionen wie Seitennavigation und Zugriff auf sichere Bereiche. Ohne diese Cookies kann die Website nicht richtig funktionieren.</p>',
