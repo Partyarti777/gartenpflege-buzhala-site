@@ -378,6 +378,12 @@ body.has-cookie-banner { padding-bottom: 200px; }
   .cookie-settings-actions { flex-direction: column-reverse; gap: 8px; }
   .cookie-settings-actions .btn { width: 100%; justify-content: center; }
 }
+
+/* WICHTIG: .cookie-category braucht position:relative, damit das
+   absolut positionierte .cookie-toggle darin landet (und nicht
+   am viewport-fixierten Modal vorbei-fliegt). brand.css hat
+   diesen Wert nicht gesetzt — hier zentral nachziehen. */
+.cookie-category { position: relative; }
 /* Toggle */
 .cookie-toggle { position: absolute; top: 16px; right: 16px; display: inline-block; width: 48px; height: 26px; }
 .cookie-toggle input { opacity: 0; width: 0; height: 0; }
