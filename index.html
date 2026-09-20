@@ -1405,6 +1405,21 @@
     outline: none; border-color: var(--primary);
     background: white;
   }
+  .contact-form .field-invalid,
+  .contact-form .field-invalid:focus {
+    border-color: #c62828 !important;
+    background: #fff5f5 !important;
+    box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.18);
+  }
+  .consent-label.field-invalid {
+    border-color: #c62828 !important;
+    background: #fff5f5 !important;
+    box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.18);
+  }
+  .consent-label.field-invalid input[type="checkbox"] {
+    outline: 3px solid rgba(198, 40, 40, 0.35);
+    outline-offset: 2px;
+  }
   .contact-form textarea { min-height: 110px; resize: vertical; }
   .contact-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .contact-form button {
@@ -2775,10 +2790,39 @@
 
   form.addEventListener("submit", function(e){
     e.preventDefault();
-    if (!form.checkValidity()) {
+    var firstInvalid = null;
+    var labels = [];
+    form.querySelectorAll('input, textarea, select').forEach(function(el){
+      if (!el.required) return;
+      var ok = true;
+      if (el.type === 'checkbox') ok = el.checked;
+      else if (el.type === 'email' || el.type === 'tel') ok = el.value.trim().length > 0;
+      else ok = el.value.trim().length > 0;
+      var lbl = el.closest('label') || el.parentElement.querySelector('label[for="' + el.id + '"]');
+      var rawName = (lbl ? lbl.textContent : el.name || el.id || 'Feld').trim().replace(/\s*\*$/, '').trim();
+      var name = el.type === 'checkbox'
+        ? 'Datenschutz-Einwilligung'
+        : (rawName.length > 28 ? rawName.substring(0, 28).replace(/\s+\S*$/, '') + '…' : rawName);
+      if (!ok) {
+        el.classList.add('field-invalid');
+        el.setAttribute('aria-invalid', 'true');
+        var parentLbl = el.closest('.consent-label');
+        if (parentLbl) parentLbl.classList.add('field-invalid');
+        if (!firstInvalid) firstInvalid = el;
+        labels.push(name);
+      } else {
+        el.classList.remove('field-invalid');
+        el.removeAttribute('aria-invalid');
+        var parentLblOk = el.closest('.consent-label');
+        if (parentLblOk) parentLblOk.classList.remove('field-invalid');
+      }
+    });
+    if (firstInvalid) {
       status.hidden = false;
       status.className = "contact-form-status status-error";
-      status.textContent = "Bitte füllen Sie alle Pflichtfelder aus.";
+      status.innerHTML = "<strong>Bitte ergänzen:</strong> " + labels.join(', ') + ".";
+      status.scrollIntoView({behavior: 'smooth', block: 'center'});
+      try { firstInvalid.focus(); } catch (e) {}
       return;
     }
     if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Wird gesendet …"; }
@@ -2796,6 +2840,13 @@
         status.className = "contact-form-status status-ok";
         status.innerHTML = '<strong>✓ Vielen Dank!</strong> Wir haben Ihre Anfrage erhalten und melden uns innerhalb von 24 Stunden. <br><small>Bei Eile: <a href="tel:+4915734405927">01573 4405927</a> (WhatsApp)</small>';
         form.reset();
+        form.querySelectorAll('.field-invalid').forEach(function(el){
+          el.classList.remove('field-invalid');
+          el.removeAttribute('aria-invalid');
+        });
+        form.querySelectorAll('.consent-label.field-invalid').forEach(function(el){
+          el.classList.remove('field-invalid');
+        });
       } else {
         var msg = (res.j && (res.j.message || res.j.error)) || "Unbekannter Fehler";
         throw new Error(msg);
