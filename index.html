@@ -122,7 +122,7 @@
   "mainEntity": [
     { "@type": "Question", "name": "Was kostet Gartenpflege bei Buzhala?", "acceptedAnswer": { "@type": "Answer", "text": "Wir arbeiten ausschließlich mit Festpreis auf Anfrage — nach kostenloser Vor-Ort-Beratung erhalten Sie ein verbindliches, schriftliches Angebot. Als grobe Orientierung: ein typischer Heckenschnitt für eine 25-m-Hecke liegt erfahrungsgemäß ab ca. 80 €. Der konkrete Preis hängt von Größe, Zustand und Leistungsumfang ab." }},
     { "@type": "Question", "name": "In welchem Gebiet sind Sie tätig?", "acceptedAnswer": { "@type": "Answer", "text": "Wir betreuen Gärten im gesamten Main-Tauber-Kreis: Külsheim, Tauberbischofsheim, Wertheim, Hardheim, Buchen, Walldürn, Boxberg, Lauda-Königshofen, Bad Mergentheim und Umgebung. Außerhalb fragen Sie bitte telefonisch — Einzelfälle möglich." }},
-    { "@type": "Question", "name": "Bieten Sie kostenlose Vor-Ort-Beratung an?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Wir kommen zu Ihnen, schauen uns den Garten an und erstellen ein verbindliches Festpreis-Angebot — kostenlos und unverbindlich. Innerhalb des Hauptgebiets entfallen Anfahrtskosten." }},
+    { "@type": "Question", "name": "Bieten Sie kostenlose Vor-Ort-Beratung an?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Wir kommen zu Ihnen, schauen uns den Garten an und erstellen anschließend ein verbindliches Festpreis-Angebot. Die Vor-Ort-Beratung selbst ist kostenlos und unverbindlich — Dauer ca. 30 Minuten. Innerhalb des Hauptgebiets entfallen Anfahrtskosten." }},
     { "@type": "Question", "name": "Wie schnell bekommen ich einen Termin?", "acceptedAnswer": { "@type": "Answer", "text": "In der Regel innerhalb von 1 bis 2 Wochen. Für kleinere Pflegearbeiten oft auch kurzfristiger — am besten morgens anrufen, dann sehen wir, ob noch etwas am gleichen Tag geht." }},
     { "@type": "Question", "name": "Seit wann gibt es Gartenpflege Buzhala?", "acceptedAnswer": { "@type": "Answer", "text": "Eigene Firma seit 2017 — davor über 20 Jahre Berufserfahrung im Garten- und Landschaftsbau bei anderen Betrieben der Region. Heute betreuen wir Privatkunden, Hausverwaltungen und Gewerbe in der Region — mit insgesamt über 25 Jahren Praxis-Erfahrung." }},
     { "@type": "Question", "name": "Arbeiten Sie auch für Hausverwaltungen oder Gewerbe?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, wir haben feste Verträge mit Hausverwaltungen und betreuen gewerbliche Außenanlagen (Pflege, Winterdienst-Vorbereitung, saisonale Beete). Auf Anfrage erstellen wir Rahmenverträge mit klaren Pflegeplänen." }},
@@ -1407,8 +1407,10 @@
   .contact-form textarea { min-height: 110px; resize: vertical; }
   .contact-form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .contact-form button {
-    margin-top: 20px;
+    margin: 20px auto 0;
+    display: block;
     width: 100%;
+    max-width: 420px;
     padding: 15px;
     background: var(--primary);
     color: white;
@@ -1419,8 +1421,12 @@
     font-size: 1rem;
     cursor: pointer;
     transition: all .15s;
+    text-align: center;
   }
   .contact-form button:hover { background: var(--primary-dark); transform: translateY(-1px); }
+  @media (max-width: 720px) {
+    .contact-form button { max-width: 100%; }
+  }
   .form-note {
     font-size: 0.78rem;
     color: var(--ink-soft);
@@ -1784,8 +1790,8 @@
       <p>Diese Website verwendet Cookies und vergleichbare Technologien. <strong>Notwendige</strong> Cookies sind für den Betrieb erforderlich. <strong>Statistik</strong> hilft uns, die Seite zu verbessern. Details in der <a href="cookies.html">Cookie-Erklärung</a> und <a href="datenschutz.html">Datenschutzerklärung</a>. <button type="button" class="cookie-info-btn" aria-label="Was bedeutet Statistik-Cookie?">ⓘ</button></p>
     </div>
     <div class="cookie-actions">
-      <button type="button" class="cookie-link" data-cookie="necessary">Nur notwendige</button>
-      <button type="button" class="cookie-link" data-cookie="settings">Einstellungen</button>
+      <button type="button" class="btn btn-secondary-outline cookie-btn" data-cookie="necessary">Ablehnen</button>
+      <button type="button" class="btn btn-secondary-outline" data-cookie="settings">Einstellungen</button>
       <button type="button" class="btn btn-primary cookie-btn" data-cookie="all">Alle akzeptieren</button>
     </div>
   </div>
@@ -2304,7 +2310,7 @@
           <span class="q-icon" aria-hidden="true"></span>
         </summary>
         <div class="answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
-          <p itemprop="text">Ja. Wir kommen zu Ihnen, schauen uns den Garten an und erstellen ein <strong>verbindliches Festpreis-Angebot</strong> — kostenlos und unverbindlich. Dauer ca. 30 Minuten. Innerhalb des Hauptgebiets entfallen Anfahrtskosten.</p>
+          <p itemprop="text">Ja. Wir kommen zu Ihnen, schauen uns den Garten an und erstellen anschließend ein <strong>verbindliches Festpreis-Angebot</strong>. Die Vor-Ort-Beratung selbst ist kostenlos und unverbindlich — Dauer ca. 30 Minuten. Innerhalb des Hauptgebiets entfallen Anfahrtskosten.</p>
         </div>
       </details>
 
