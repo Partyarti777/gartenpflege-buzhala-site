@@ -1427,6 +1427,11 @@
     margin-top: 14px;
     line-height: 1.5;
   }
+  .form-consent { margin-top: 16px; padding: 12px 14px; background: var(--bg-soft, #f3efe2); border: 1px solid var(--line, #e2e8e3); border-radius: 10px; }
+  .consent-label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; font-size: 0.85rem; line-height: 1.45; color: var(--ink-soft); }
+  .consent-label input[type="checkbox"] { flex: 0 0 auto; width: 18px; height: 18px; margin-top: 2px; cursor: pointer; accent-color: var(--primary); }
+  .consent-label a { color: var(--primary); text-decoration: underline; }
+  .consent-label a:hover { color: var(--primary-dark); }
 
   /* ========== MAPS / STANDORT ========== */
   .map-section { padding: 60px 0 80px; background: var(--bg-soft, #f5f1e8); }
@@ -2523,8 +2528,15 @@
         <label for="message">Kurzbeschreibung Ihres Anliegens</label>
         <textarea id="message" name="message" placeholder="z.B. Hecke ca. 25 Meter, Formschnitt auf 1,60 m, Termin in 2 Wochen möglich. Bei Rollrasen: ungefähre Fläche in m²."></textarea>
 
-        <button type="submit">Anfrage senden — kostenlos &amp; unverbindlich</button>
-        <p class="form-note">Mit dem Absenden stimmen Sie zu, dass wir Ihre Angaben zur Bearbeitung Ihrer Anfrage nutzen. Keine Weitergabe an Dritte, kein Newsletter. Details in der <a href="#datenschutz">Datenschutzerklärung</a>.</p>
+        <div class="form-consent">
+          <label class="consent-label">
+            <input type="checkbox" id="consent-datenschutz" name="consent-datenschutz" required />
+            <span>Ich habe die <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Angaben zur Bearbeitung meiner Anfrage zu. Keine Weitergabe an Dritte, kein Newsletter.</span>
+          </label>
+        </div>
+
+        <button type="submit" id="contact-submit">Anfrage senden — kostenlos &amp; unverbindlich</button>
+        <p class="form-note">Wir nutzen Ihre Angaben ausschließlich zur Bearbeitung Ihrer Anfrage. Details zur Speicherdauer und zu Ihren Rechten finden Sie in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
       </form>
     </div>
   </div>
