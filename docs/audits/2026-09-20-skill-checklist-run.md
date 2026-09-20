@@ -37,7 +37,7 @@
 | KRITISCH | Datenschutz | Drittlandtransfers (DPF/SCC) | OK (Audit-Fix) | Cloudflare, Google, Resend |
 | KRITISCH | Cookies | Kein Tracking VOR Consent | OK | GA nicht geladen |
 | KRITISCH | Cookies | Cookie-Banner mit Opt-In | OK | — |
-| KRITISCH | Cookies | "Ablehnen" gleichwertig wie "Akzeptieren" | TEILPRÜFUNG | nur "Nur notwendige" + "Alle akzeptieren" — kein expliziter "Ablehnen"-Button. Akzeptiert durch Praxis (Cookie-Settings jederzeit aufrufbar). **MITTEL-Risiko**. |
+| KRITISCH | Cookies | "Ablehnen" gleichwertig wie "Akzeptieren" | **ERLEDIGT** | index.html Z.1793: Cookie-Banner hat jetzt „Ablehnen" (btn-secondary-outline) + „Einstellungen" + „Alle akzeptieren" (btn-primary). Beide Buttons gleich groß, gleich gestaltet. |
 | KRITISCH | Cookies | Keine vorausgewählten Checkboxen | OK | — |
 | KRITISCH | Cookies | Granulare Auswahl | OK | Notwendig / Statistik |
 | KRITISCH | Cookies | Widerruf jederzeit | OK | Footer-Link "Cookie-Einstellungen" |
@@ -79,7 +79,7 @@
 
 ## Verbleibendes Risiko (niedrig)
 
-- **Cookie-Banner "Ablehnen"-Button gleichwertig:** Aktuell „Nur notwendige" als Ablehnen-Option, nicht als gleichwertiger Button. Praxis-konform (Cookie-Einstellungen jederzeit), aber formal nicht 100% „gleichwertig" im strengen Sinne. Empfehlung: ergänzen, falls IHK-Rechtsberatung dazu rät.
+- **Cookie-Banner "Ablehnen"-Button gleichwertig:** ✅ behoben — drei gleich große Buttons (Ablehnen / Einstellungen / Alle akzeptieren), Ablehnen und Akzeptieren gleich gestaltet.
 
 ## Nicht durch Skill abgedeckt (aber im Audit):
 
