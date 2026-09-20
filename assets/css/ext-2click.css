@@ -1,0 +1,148 @@
+/* ===== 2-Klick Modal fuer externe Dienste (WhatsApp, Instagram, TikTok, Google Maps) ===== */
+
+.ext-2click-modal {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  max-width: 480px;
+  width: calc(100% - 32px);
+  background: #ffffff;
+  box-shadow: 0 24px 48px rgba(14, 32, 24, 0.25), 0 2px 6px rgba(14, 32, 24, 0.08);
+  color: #0e2018;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.ext-2click-modal::backdrop {
+  background: rgba(14, 32, 24, 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.ext-2click-modal[open] {
+  animation: ext-modal-in 220ms cubic-bezier(.2,.9,.3,1.1);
+}
+.ext-2click-modal[open]::backdrop {
+  animation: ext-backdrop-in 220ms ease-out;
+}
+@keyframes ext-modal-in {
+  from { transform: translateY(8px) scale(.97); opacity: 0; }
+  to   { transform: translateY(0)    scale(1);   opacity: 1; }
+}
+@keyframes ext-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.ext-2click-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.4rem;
+  font-weight: 400;
+  cursor: pointer;
+  color: #6b7c75;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-family: inherit;
+  transition: background .15s, color .15s;
+}
+.ext-2click-close:hover,
+.ext-2click-close:focus { background: #f3efe2; color: #0e2018; outline: none; }
+.ext-2click-close:focus-visible { box-shadow: 0 0 0 3px rgba(63, 191, 181, 0.35); }
+
+.ext-2click-header {
+  padding: 28px 28px 4px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.ext-2click-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.ext-2click-header h2 {
+  margin: 0;
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0e2018;
+  line-height: 1.3;
+}
+.ext-2click-text {
+  padding: 12px 28px 0;
+  margin: 0;
+  color: #4a5a55;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+.ext-2click-text a {
+  color: #2da098;
+  text-decoration: underline;
+}
+.ext-2click-link {
+  padding: 8px 28px 0;
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7c75;
+  word-break: break-all;
+}
+
+.ext-2click-actions {
+  display: flex;
+  gap: 10px;
+  padding: 22px 28px 28px;
+  flex-wrap: wrap;
+}
+.ext-2click-actions button {
+  flex: 1 1 160px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  font-family: 'Poppins', system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  text-align: center;
+  transition: background .15s, transform .15s, border-color .15s, color .15s;
+}
+.ext-2click-cancel {
+  background: transparent;
+  border-color: #e2e8e3;
+  color: #0e2018;
+}
+.ext-2click-cancel:hover { background: #f3efe2; border-color: #cbd4ce; }
+.ext-2click-confirm {
+  background: #3FBFB5;
+  color: #ffffff;
+  border-color: #3FBFB5;
+}
+.ext-2click-confirm:hover { background: #2da098; border-color: #2da098; transform: translateY(-1px); }
+.ext-2click-confirm:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(63, 191, 181, 0.4); }
+
+@media (max-width: 480px) {
+  .ext-2click-header { padding: 24px 22px 4px; gap: 12px; }
+  .ext-2click-icon { width: 40px; height: 40px; }
+  .ext-2click-header h2 { font-size: 1.1rem; }
+  .ext-2click-text { padding: 10px 22px 0; font-size: 0.92rem; }
+  .ext-2click-link { padding: 8px 22px 0; }
+  .ext-2click-actions { padding: 18px 22px 22px; }
+  .ext-2click-actions button { flex-basis: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ext-2click-modal[open],
+  .ext-2click-modal[open]::backdrop { animation: none; }
+  .ext-2click-confirm:hover { transform: none; }
+}
