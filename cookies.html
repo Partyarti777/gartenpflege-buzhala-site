@@ -14,8 +14,8 @@
 <!-- ===== Font-Preload für Above-the-Fold (Poppins 700 + Inter 400) ===== -->
 <link rel="preload" href="/fonts/pxiByp8kv8JHgFVrLCz7Z11lFc-K.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa2ZL7SUc.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="brand.css?v=15">
-<link rel="stylesheet" href="main.css?v=15">
+<link rel="stylesheet" href="brand.css?v=17">
+<link rel="stylesheet" href="main.css?v=17">
 <link rel="stylesheet" href="assets/css/ext-2click.css?v=1">
 </head>
 <body>
@@ -32,6 +32,68 @@
     </p>
   </div>
 </section>
+
+<section class="cookie-inline-settings" aria-label="Cookie-Einstellungen anpassen">
+  <div class="wrap">
+    <div class="cookie-settings-card">
+      <h3>Cookie-Einstellungen anpassen</h3>
+      <p class="muted">Hier können Sie Ihre Cookie-Auswahl jederzeit ändern. „Notwendig" ist für den Betrieb erforderlich und immer aktiv; „Statistik" hilft uns, die Website zu verbessern, und ist nur aktiv, wenn Sie zustimmen.</p>
+      <div class="cookie-category required">
+        <div class="cat-meta"><strong>Notwendig</strong><span>immer aktiv</span></div>
+        <p>Erforderlich für Grundfunktionen wie Seitennavigation und Zugriff auf sichere Bereiche. Ohne diese Cookies kann die Website nicht richtig funktionieren.</p>
+      </div>
+      <div class="cookie-category">
+        <label class="cookie-toggle">
+          <input type="checkbox" id="cookie-statistics-inline" />
+          <span class="slider"></span>
+        </label>
+        <div class="cat-meta"><strong>Statistik</strong><span>Anonymisiert</span></div>
+        <p>Hilft uns zu verstehen, wie Besucher mit der Website interagieren, durch anonyme Erfassung und Berichterstattung von Daten (z. B. welche Seiten häufig besucht werden).</p>
+      </div>
+      <div class="cookie-settings-actions">
+        <button type="button" class="btn btn-secondary-outline" id="cookieInlineReject">Ablehnen</button>
+        <button type="button" class="btn btn-secondary-outline" id="cookieInlineSave">Auswahl speichern</button>
+        <button type="button" class="btn btn-primary" id="cookieInlineAll">Alle akzeptieren</button>
+      </div>
+      <p id="cookieInlineStatus" class="cookie-inline-status" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  'use strict';
+  var KEY = 'buzhala_cookie_consent_v1';
+  var banner = document.getElementById('cookie-banner');
+  var statBox = document.getElementById('cookie-statistics-inline');
+  function readConsent(){
+    try { return JSON.parse(localStorage.getItem(KEY) || 'null'); }
+    catch(e){ return null; }
+  }
+  function writeConsent(statistics, statusText){
+    var obj = { necessary: true, statistics: !!statistics, ts: Date.now() };
+    try { localStorage.setItem(KEY, JSON.stringify(obj)); } catch(e){}
+    if (banner) { banner.hidden = true; document.body.classList.remove('has-cookie-banner'); }
+    var s = document.getElementById('cookieInlineStatus');
+    if (s) { s.textContent = statusText || 'Einstellungen gespeichert.'; s.classList.add('ok'); }
+  }
+  var existing = readConsent();
+  if (statBox && existing && typeof existing.statistics === 'boolean') {
+    statBox.checked = existing.statistics;
+  }
+  document.getElementById('cookieInlineReject')?.addEventListener('click', function(){
+    if (statBox) statBox.checked = false;
+    writeConsent(false, 'Sie haben Statistik-Cookies abgelehnt — Notwendig bleibt aktiv.');
+  });
+  document.getElementById('cookieInlineSave')?.addEventListener('click', function(){
+    writeConsent(!(statBox && !statBox.checked), 'Ihre Auswahl wurde gespeichert.');
+  });
+  document.getElementById('cookieInlineAll')?.addEventListener('click', function(){
+    if (statBox) statBox.checked = true;
+    writeConsent(true, 'Alle Cookies akzeptiert. Danke!');
+  });
+})();
+</script>
 
 <main class="subpage-body">
   <div class="wrap">

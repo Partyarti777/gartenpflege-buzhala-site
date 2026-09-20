@@ -298,3 +298,13 @@ body.has-cookie-banner { padding-bottom: 200px; }
 }
 .cookie-toggle input:checked + .slider { background: var(--primary); }
 .cookie-toggle input:checked + .slider::before { transform: translateX(22px); }
+
+/* Cookie-Settings inline (cookies.html oberhalb der Kategorie-Details) */
+.cookie-inline-settings { padding: 32px 0 56px; background: var(--bg-soft, #f3efe2); }
+.cookie-inline-settings .wrap { max-width: 720px; }
+.cookie-inline-settings .cookie-settings-card { background: #ffffff; box-shadow: 0 16px 48px -8px rgba(11,31,23,.18), 0 0 0 1px rgba(11,31,23,.06); }
+.cookie-inline-settings .cookie-category { margin-top: 14px; }
+.cookie-inline-settings .cookie-settings-actions { flex-wrap: wrap; }
+.cookie-inline-settings .btn { min-width: 140px; }
+.cookie-inline-status { margin: 16px 0 0; color: #1b5e20; font-weight: 500; }
+.cookie-inline-status.ok::before { content: "✓ "; }

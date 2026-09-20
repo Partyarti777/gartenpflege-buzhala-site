@@ -94,7 +94,7 @@
     '    </div>',
     '    <div class="footer-bottom">',
     '      <span>© 2017–2026 Gartenpflege &amp; Service Buzhala · Külsheim-Hundheim</span>',
-    '      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="#" id="openCookieSettings">Cookie-Einstellungen</a></span>',
+    '      <span><a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="cookies.html">Cookie-Einstellungen</a></span>',
     '    </div>',
     '  </div>',
     '</footer>'
