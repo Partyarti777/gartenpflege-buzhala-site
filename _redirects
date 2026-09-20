@@ -3,3 +3,6 @@
 /cookies.html /cookies 301
 /datenschutzerklaerung /datenschutz 301
 /datenschutzerklaerung.html /datenschutz 301
+
+# Soft-404 Fix: nicht existierende URLs auf die gestaltete 404-Seite
+/* /404.html 404
