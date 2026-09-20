@@ -913,20 +913,47 @@
   .testi-summary strong { color: var(--ink); }
   .testi-cta-row { grid-column: 1 / -1; display: flex; justify-content: center; margin: 24px 0 8px; }
   .testi-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
-    justify-items: stretch; align-items: stretch;
+    display: flex; gap: 14px;
+    padding: 4px 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    overscroll-behavior-x: contain;
   }
-  @media (min-width: 1200px) { .testi-grid { grid-template-columns: repeat(3, 1fr); } }
-  .testi-card { display: flex; flex-direction: column; }
+  .testi-grid::-webkit-scrollbar { display: none; }
+  .testi-card { display: flex; flex-direction: column; flex: 0 0 calc(100% - 48px); touch-action: pan-x pan-y; user-select: none; -webkit-user-drag: none; }
+  @media (min-width: 768px) {
+    .testi-grid { padding: 4px 20px; gap: 18px; }
+    .testi-card { flex: 0 0 calc(50% - 18px); }
+  }
+  @media (min-width: 1200px) {
+    .testi-grid { padding: 4px 24px; gap: 20px; }
+    .testi-card { flex: 0 0 calc(33.333% - 16px); }
+  }
   .testi-card.honest { /* 4-Sterne = ehrliche Bewertung, ohne visuelle Hervorhebung */ }
-  .testi-card { padding: 26px 24px; }
+  .testi-card { padding: 18px 20px; }
+  /* Slider-Pfeil-Buttons */
+  .testi-nav { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+  .testi-nav button {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: white; border: 1.5px solid var(--line);
+    color: var(--primary-dark); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all .18s ease;
+  }
+  .testi-nav button:hover:not(:disabled) { background: var(--primary); color: white; border-color: var(--primary); }
+  .testi-nav button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .testi-nav button:focus-visible { outline: 2px solid var(--turquoise); outline-offset: 2px; }
+  .testi-nav button svg { width: 20px; height: 20px; }
+  @media (max-width: 767px) { .testi-nav { display: none; } }
   .testi-card.testi-link { display: flex; flex-direction: column; color: inherit; text-decoration: none; transition: transform .18s, box-shadow .18s; cursor: pointer; }
   .testi-card.testi-link:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -10px rgba(11,31,23,.25); text-decoration: none; color: inherit; }
   .testi-card.testi-link::after { content: "↗"; position: absolute; top: 12px; right: 14px; font-size: 0.95rem; color: rgba(11,31,23,.4); }
   .testi-card { position: relative; }
   .testi-text { font-size: 0.92rem; line-height: 1.55; }
-  @media (max-width: 800px) { .testi-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .testi-grid { grid-template-columns: 1fr; } .testi-head { flex-direction: column; gap: 12px; } .cylex-rating { margin-left: 0; } }
+  @media (max-width: 560px) { .testi-head { flex-direction: column; gap: 12px; } .cylex-rating { margin-left: 0; } }
   .testi-card {
     background: white;
     padding: 28px;
@@ -945,36 +972,36 @@
     position: absolute;
     top: 8px; left: 18px;
     font-family: 'Poppins', Georgia, serif;
-    font-size: 4.5rem; line-height: 1;
+    font-size: 3rem; line-height: 1;
     color: rgba(63,191,181,.18);
     pointer-events: none;
   }
-  .testi-stars { color: #FBBC05; margin-bottom: 14px; letter-spacing: 0.08em; font-size: 1.35rem; line-height: 1; position: relative; z-index: 1; }
+  .testi-stars { color: #FBBC05; margin-bottom: 8px; letter-spacing: 0.08em; font-size: 1.1rem; line-height: 1; position: relative; z-index: 1; }
   .testi-text {
-    font-size: 0.98rem;
+    font-size: 0.86rem;
     color: var(--ink);
-    margin-bottom: 18px;
-    line-height: 1.6;
+    margin-bottom: 14px;
+    line-height: 1.5;
   }
   .testi-author {
     display: flex; align-items: center; gap: 12px;
-    padding-top: 14px;
+    padding-top: 10px;
     border-top: 1px solid var(--line);
   }
   .testi-avatar {
-    width: 42px; height: 42px;
+    width: 36px; height: 36px;
     border-radius: 50%;
     background: var(--primary);
     color: white;
     display: grid; place-items: center;
-    font-weight: 700; font-size: 0.95rem;
+    font-weight: 700; font-size: 0.82rem;
   }
-  .testi-meta { font-size: 0.92rem; line-height: 1.4; }
-  .testi-meta strong { display: block; color: var(--ink); font-weight: 600; font-size: 1.02rem; }
+  .testi-meta { font-size: 0.84rem; line-height: 1.35; }
+  .testi-meta strong { display: block; color: var(--ink); font-weight: 600; font-size: 0.92rem; }
   .testi-meta span { color: var(--ink-soft); display: block; }
   .testi-meta .verified {
-    color: var(--turquoise-dark); font-weight: 600; font-size: 0.82rem;
-    margin-top: 4px;
+    color: var(--turquoise-dark); font-weight: 600; font-size: 0.76rem;
+    margin-top: 2px;
   }
 
   /* ========== PRICING ========== */
@@ -2044,10 +2071,7 @@
       <strong>10 echte Bewertungen</strong> aus Google (4,8 ⭐ · 6 Reviews) und Cylex (5,0 ⭐ · 4 Reviews) — alle Bewertungstexte stammen 1:1 von den Original-Plattformen.
       <span class="testi-timestamp">Stand: 19. September 2026 — letzte manuelle Aktualisierung</span>
     </div>
-    <div class="testi-grid">
-
-      <!-- ========== GOOGLE-BEWERTUNGEN (6) ========== -->
-      <h3 class="testi-source-heading"><span class="src-icon">📍</span> Google-Bewertungen <span class="src-meta">4,8 ★ · 6 Reviews</span></h3>
+    <div class="testi-grid" role="region" aria-roledescription="carousel" aria-label="Kundenstimmen — 10 echte Bewertungen">
 
       <!-- 1. Dennis Gundelsweiler -->
       <article class="testi-card">
@@ -2056,7 +2080,7 @@
         <div class="testi-author">
           <div class="testi-avatar">DG</div>
           <div class="testi-meta">
-            <strong>Dennis Gundelsweiler</strong>
+            <strong>Dennis G.</strong>
             <span>Google Local Guide · 13 Reviews</span>
             <span class="verified">✓ Google · vor 4 Jahren</span>
           </div>
@@ -2070,7 +2094,7 @@
         <div class="testi-author">
           <div class="testi-avatar">DL</div>
           <div class="testi-meta">
-            <strong>Dietmar Laumer</strong>
+            <strong>Dietmar L.</strong>
             <span>Google Local Guide · 6 Reviews</span>
             <span class="verified">✓ Google · vor 5 Jahren</span>
           </div>
@@ -2098,7 +2122,7 @@
         <div class="testi-author">
           <div class="testi-avatar">CM</div>
           <div class="testi-meta">
-            <strong>Claudia Maser</strong>
+            <strong>Claudia M.</strong>
             <span>Google Local Guide · 30 Reviews</span>
             <span class="verified">✓ Google · vor 4 Jahren</span>
           </div>
@@ -2112,7 +2136,7 @@
         <div class="testi-author">
           <div class="testi-avatar">JB</div>
           <div class="testi-meta">
-            <strong>Josef Botta</strong>
+            <strong>Josef B.</strong>
             <span>Google Local Guide · 3 Reviews</span>
             <span class="verified">✓ Google · vor 3 Jahren</span>
           </div>
@@ -2134,7 +2158,6 @@
       </article>
 
       <!-- ========== CYLEX-BEWERTUNGEN (4) ========== -->
-      <h3 class="testi-source-heading"><span class="src-icon">📋</span> Cylex-Bewertungen <span class="src-meta">5,0 ★ · 4 Reviews</span></h3>
 
       <!-- 7. Klaus B. -->
       <article class="testi-card">
@@ -2157,7 +2180,7 @@
         <div class="testi-author">
           <div class="testi-avatar">HE</div>
           <div class="testi-meta">
-            <strong>Heinz Eisert</strong>
+            <strong>Heinz E.</strong>
             <span>Cylex</span>
             <span class="verified">✓ Cylex · Februar 2025</span>
           </div>
@@ -2171,7 +2194,7 @@
         <div class="testi-author">
           <div class="testi-avatar">HW</div>
           <div class="testi-meta">
-            <strong>Hans &amp; Birgit Winkler</strong>
+            <strong>Hans &amp; Birgit W.</strong>
             <span>Cylex</span>
             <span class="verified">✓ Cylex · vor 2 Jahren</span>
           </div>
@@ -2185,13 +2208,21 @@
         <div class="testi-author">
           <div class="testi-avatar">DL</div>
           <div class="testi-meta">
-            <strong>Dietmar Laumer</strong>
+            <strong>Dietmar L.</strong>
             <span>Cylex</span>
             <span class="verified">✓ Cylex · vor 5 Jahren</span>
           </div>
         </div>
       </article>
 
+    </div>
+    <div class="testi-nav" aria-label="Bewertungen navigieren">
+      <button type="button" class="testi-prev" aria-label="Vorherige Bewertungen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button type="button" class="testi-next" aria-label="Nächste Bewertungen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
     <div style="text-align: center; margin-top: 36px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
 
@@ -2741,6 +2772,43 @@
       if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = "Anfrage senden — kostenlos & unverbindlich"; }
     });
   });
+})();
+</script>
+
+<script>
+/* Testimonials-Slider: Pfeil-Buttons + Keyboard */
+(function(){
+  var grid = document.querySelector('.testi-grid');
+  if (!grid) return;
+  var prev = document.querySelector('.testi-prev');
+  var next = document.querySelector('.testi-next');
+  if (!prev || !next) return;
+
+  function step(){
+    var card = grid.querySelector('.testi-card');
+    if (!card) return 320;
+    var gap = parseFloat(getComputedStyle(grid).gap) || 14;
+    return card.offsetWidth + gap;
+  }
+  function update(){
+    prev.disabled = grid.scrollLeft <= 1;
+    next.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 1;
+  }
+  prev.addEventListener('click', function(){
+    grid.scrollBy({left: -step(), behavior: 'smooth'});
+  });
+  next.addEventListener('click', function(){
+    grid.scrollBy({left: step(), behavior: 'smooth'});
+  });
+  grid.addEventListener('scroll', update);
+  window.addEventListener('resize', update);
+  // Keyboard-Navigation wenn Slider im Focus
+  grid.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+  });
+  grid.setAttribute('tabindex', '0');
+  update();
 })();
 </script>
 </body>
