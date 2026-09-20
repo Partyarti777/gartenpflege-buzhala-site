@@ -1175,11 +1175,24 @@
   .glossary-section .section-head { text-align: center; max-width: 720px; margin: 0 auto 48px; }
   .glossary-section .section-head p { font-size: 1.05rem; color: var(--ink-soft); }
   .glossary-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    margin: 0;
-    padding: 0;
+    display: flex; gap: 16px;
+    padding: 4px 16px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    overscroll-behavior-x: contain;
+  }
+  .glossary-grid::-webkit-scrollbar { display: none; }
+  .glossary-card { flex: 0 0 calc(100% - 32px); }
+  @media (min-width: 768px) {
+    .glossary-grid { padding: 4px 20px; gap: 18px; }
+    .glossary-card { flex: 0 0 calc(50% - 12px); }
+  }
+  @media (min-width: 1200px) {
+    .glossary-grid { padding: 4px 24px; gap: 20px; }
+    .glossary-card { flex: 0 0 calc(33.333% - 14px); }
   }
   .glossary-card {
     background: white;
@@ -1188,6 +1201,8 @@
     padding: 28px 26px 26px;
     box-shadow: var(--shadow-sm);
     transition: transform .18s, box-shadow .18s, border-color .18s;
+    user-select: none;
+    -webkit-user-drag: none;
   }
   .glossary-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: rgba(63,191,181,.4); }
   .glossary-ico {
@@ -1213,8 +1228,20 @@
     line-height: 1.6;
   }
   .glossary-card dd em { color: var(--ink-soft); font-style: italic; }
-  @media (max-width: 900px) { .glossary-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 560px) { .glossary-grid { grid-template-columns: 1fr; } }
+  /* Glossar-Pfeil-Buttons */
+  .glossary-nav { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+  .glossary-nav button {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: white; border: 1.5px solid var(--line);
+    color: var(--primary-dark); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: all .18s ease;
+  }
+  .glossary-nav button:hover:not(:disabled) { background: var(--primary); color: white; border-color: var(--primary); }
+  .glossary-nav button:disabled { opacity: 0.35; cursor: not-allowed; }
+  .glossary-nav button:focus-visible { outline: 2px solid var(--turquoise); outline-offset: 2px; }
+  .glossary-nav button svg { width: 20px; height: 20px; }
+  @media (max-width: 767px) { .glossary-nav { display: none; } }
 
   /* ========== EINSATZGEBIET (neu) ========== */
   .area-grid-new {
@@ -2398,6 +2425,14 @@
         <dd>Geometrische oder figürliche Gestaltung von Hecken und Gehölzen — Kugel, Quader oder freie Formen. Eine Spezialdisziplin, die Erfahrung und regelmäßige Pflege erfordert.</dd>
       </div>
     </dl>
+    <div class="glossary-nav" aria-label="Leistungen navigieren">
+      <button type="button" class="glossary-prev" aria-label="Vorherige Leistungen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button type="button" class="glossary-next" aria-label="Nächste Leistungen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -2830,6 +2865,61 @@
     if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
   });
   grid.setAttribute('tabindex', '0');
+  update();
+})();
+</script>
+
+<script>
+/* Glossar-Slider: Pfeil-Buttons + Keyboard + rAF-Smooth-Scroll */
+(function(){
+  var grid = document.querySelector('.glossary-grid');
+  if (!grid) return;
+  var prev = document.querySelector('.glossary-prev');
+  var next = document.querySelector('.glossary-next');
+  if (!prev || !next) return;
+
+  function step(){
+    var card = grid.querySelector('.glossary-card');
+    if (!card) return 320;
+    var gap = parseFloat(getComputedStyle(grid).gap) || 14;
+    return card.offsetWidth + gap;
+  }
+  function update(){
+    prev.disabled = grid.scrollLeft <= 1;
+    next.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 1;
+  }
+  function smoothScrollBy(element, distance, duration){
+    duration = duration || 450;
+    var start = element.scrollLeft;
+    var target = start + distance;
+    var maxScroll = element.scrollWidth - element.clientWidth;
+    if (target < 0) target = 0;
+    if (target > maxScroll) target = maxScroll;
+    var delta = target - start;
+    if (Math.abs(delta) < 1) return;
+    var startTime = null;
+    function frame(now){
+      if (!startTime) startTime = now;
+      var elapsed = now - startTime;
+      var progress = Math.min(elapsed / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      element.scrollLeft = start + delta * ease;
+      if (progress < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  prev.addEventListener('click', function(){ smoothScrollBy(grid, -step()); });
+  next.addEventListener('click', function(){ smoothScrollBy(grid, step()); });
+  grid.addEventListener('scroll', update);
+  window.addEventListener('resize', update);
+  grid.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+  });
+  grid.setAttribute('tabindex', '0');
+  grid.setAttribute('role', 'region');
+  grid.setAttribute('aria-roledescription', 'carousel');
+  grid.setAttribute('aria-label', 'Unsere Gartenpflege-Leistungen');
   update();
 })();
 </script>
