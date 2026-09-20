@@ -2568,20 +2568,7 @@
           <small style="opacity:0.85;">Beim Klick werden Daten an Google übertragen.<br>Siehe Datenschutzerklärung.</small>
         </div>
       </div>
-      <script>
-      document.querySelectorAll('.map-placeholder').forEach(function(el){
-        function loadMap(){
-          var s = el.getAttribute('data-src');
-          var f = document.createElement('iframe');
-          f.src = s; f.width = '100%'; f.height = '380';
-          f.style.border = '0'; f.setAttribute('allowfullscreen',''); f.setAttribute('loading','lazy');
-          f.setAttribute('referrerpolicy','no-referrer-when-downgrade');
-          el.parentNode.replaceChild(f, el);
-        }
-        el.addEventListener('click', loadMap);
-        el.addEventListener('keydown', function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();loadMap();} });
-      });
-      </script>
+      <script src="assets/js/map-placeholder.js?v=1" defer></script>
                 </div>
                 <div class="map-info">
                   <h3>Adresse</h3>
