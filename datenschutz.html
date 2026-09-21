@@ -53,6 +53,7 @@
       <p>Diese Zugriffsdaten werden ausschließlich zum Zwecke der Sicherstellung eines störungsfreien Betriebs der Seite sowie der Verbesserung unserer Online-Präsenz ausgewertet. Dies dient gemäß Art. 6 Abs. 1 S. 1 lit. f DSGVO der Wahrung unserer im Rahmen einer Interessensabwägung überwiegenden berechtigten Interessen an einer korrekten Darstellung unserer Online-Präsenz. Alle Zugriffsdaten werden spätestens sieben Tage nach Ende Ihres Seitenbesuchs gelöscht.</p>
 
       <h3>Hostingdienstleistungen durch einen Drittanbieter</h3>
+      <p><strong>Logfiles im Detail:</strong> Cloudflare Pages speichert HTTP-Zugriffslogs (IP-Adresse, User-Agent, Referer, Timestamp) für maximal 7 Tage auf global verteilten Servern. Der separat betriebene Cloudflare-Worker <code>buzhala-contact</code> schreibt Ausführungslogs (Request-Metadaten, Resend-API-Response-Codes, anonymisierte IP-Präfixe) für maximal 30 Tage — diese werden ausschließlich zur Fehlerdiagnose und Sicherheitsanalyse verwendet und enthalten keine Formularinhalte.</p>
       <p>Im Rahmen einer Verarbeitung in unserem Auftrag erbringt ein Drittanbieter für uns die Dienste zum Hosting und zur Darstellung der Webseite. Alle Daten, die im Rahmen der Nutzung dieser Webseite oder in dafür vorgesehenen Formularen wie folgend beschrieben erhoben werden, werden auf seinen Servern verarbeitet. Eine Verarbeitung auf anderen Servern findet nur in dem hier erläuterten Rahmen statt.</p>
       <p>Dieser Dienstleister sitzt innerhalb eines Landes der Europäischen Union oder des Europäischen Wirtschaftsraums.
 <p><strong>Hosting-Provider:</strong> Cloudflare Pages (Cloudflare Inc., 101 Townsend St, San Francisco, CA 94107, USA). Cloudflare Pages ist ein statischer Hosting-Dienst mit globalem CDN. Beim Aufruf unserer Seiten werden Ihre Anfragen an den geografisch nächstgelegenen Cloudflare-Server weitergeleitet. Cloudflare verarbeitet hierbei Ihre IP-Adresse und weitere technische Daten (z. B. User-Agent, Referer) zum Zwecke der Bereitstellung und Sicherung der Website. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer sicheren und schnellen Bereitstellung unserer Online-Präsenz).</p>
@@ -81,7 +82,13 @@
     </section>
 
     <section class="legal-section">
-      <h2>3. Cookies und Webanalyse</h2>
+      <h2>3. Spam-Schutz (Honeypot)</h2>
+      <p>Unser Kontaktformular ist durch ein verstecktes Formularfeld („Honeypot") gegen automatisierte Spam-Eingaben geschützt. Menschen können dieses Feld nicht sehen oder ausfüllen — Bots hingegen schon. Wenn das Feld ausgefüllt wird, wird die Anfrage stillschweigend verworfen, ohne dass eine E-Mail versendet wird. Es werden <strong>keine personenbezogenen Daten</strong> aus dem Honeypot-Feld erhoben, gespeichert oder weiterverarbeitet.</p>
+      <p>Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Verhinderung von Spam und der Aufrechterhaltung der Erreichbarkeit unseres Kontaktformulars).</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>4. Cookies und Webanalyse</h2>
       <p>Um den Besuch unserer Website attraktiv zu gestalten und die Nutzung bestimmter Funktionen zu ermöglichen, um passende Produkte anzuzeigen oder zur Marktforschung verwenden wir auf verschiedenen Seiten sogenannte Cookies. Dies dient der Wahrung unserer im Rahmen einer Interessensabwägung überwiegenden berechtigten Interessen an einer optimierten Darstellung unseres Angebots gemäß Art. 6 Abs. 1 S. 1 lit. f DSGVO. Cookies sind kleine Textdateien, die automatisch auf Ihrem Endgerät gespeichert werden. Einige der von uns verwendeten Cookies werden nach Ende der Browser-Sitzung, also nach Schließen Ihres Browsers, wieder gelöscht (sog. Sitzungs-Cookies). Andere Cookies verbleiben auf Ihrem Endgerät und ermöglichen uns, Ihren Browser beim nächsten Besuch wiederzuerkennen (persistente Cookies). Die Dauer der Speicherung können Sie der Übersicht in den Cookie-Einstellungen Ihres Webbrowsers entnehmen. Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und einzeln über deren Annahme entscheiden oder die Annahme von Cookies für bestimmte Fälle oder generell ausschließen. Jeder Browser unterscheidet sich in der Art, wie er die Cookie-Einstellungen verwaltet. Diese ist in dem Hilfemenü jedes Browsers beschrieben, welches Ihnen erläutert, wie Sie Ihre Cookie-Einstellungen ändern können. Diese finden Sie für die jeweiligen Browser unter den folgenden Links:</p>
       <p>Bei der Nichtannahme von Cookies kann die Funktionalität unserer Website eingeschränkt sein.</p>
       <p>Hilfe zum Verwalten von Cookies in Ihrem Browser finden Sie hier:</p>
@@ -93,6 +100,14 @@
         <li><a href="https://help.opera.com/en/latest/web-preferences/#cookies" rel="noopener" target="_blank">Opera</a></li>
       </ul>
 
+      <h3>Eingesetzte Cookies und Speichertechnologien im Detail</h3>
+      <p>Wir setzen <strong>keine Tracking-, Werbe- oder Marketing-Cookies</strong> ein. Auch Cloudflare Web Analytics (siehe unten) kommt vollständig ohne Cookies aus. Die einzige clientseitige Speicherung ist ein technisch notwendiger LocalStorage-Eintrag für die Funktion unseres Cookie-Banners:</p>
+      <dl>
+        <dt><strong>buzhala_cookie_consent_v1</strong> (LocalStorage)</dt>
+        <dd>Speichert die Entscheidung im Cookie-Banner (akzeptiert/abgelehnt/Kategorie-Wahl) sowie einen Zeitstempel der Entscheidung. Wird ausschließlich lokal im Browser gespeichert, nicht an Server übertragen. Keine automatische Löschfrist — bleibt bis zur manuellen Bereinigung der Browser-Daten durch den Nutzer bestehen. Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (technische Notwendigkeit).</dd>
+      </dl>
+      <p>Cookies, die durch externe Dienste nach Ihrer Einwilligung gesetzt werden (z. B. Google Maps nach Klick auf den Platzhalter), sind in den jeweiligen Abschnitten dieser Datenschutzerklärung dokumentiert.</p>
+
       <h3>Einsatz von Cloudflare Web Analytics</h3>
       <p>Diese Website nutzt <strong>Cloudflare Web Analytics</strong> (Anbieter: Cloudflare Inc., 101 Townsend St, San Francisco, CA 94107, USA) zur anonymisierten Reichweitenmessung und Performance-Überwachung. Cloudflare Web Analytics ist <strong>privacy-first</strong>: Es werden <strong>keine Cookies</strong> gesetzt, <strong>keine IP-Adressen gespeichert</strong> und <strong>keine Nutzerprofile</strong> erstellt. Die Erhebung erfolgt stichprobenartig und rein aggregiert.</p>
       <p>Erhoben werden ausschließlich technische Nutzungsdaten wie Page-Views, Verweildauer, Browser-Typ, Bildschirmauflösung, ungefähres Herkunftsland (auf Länder-Ebene) und Referrer-URLs. Diese Daten werden auf Cloudflare-Servern verarbeitet und nach <strong>30 Tagen</strong> automatisch gelöscht. Eine Zusammenführung mit anderen Daten oder eine Identifizierung einzelner Personen ist technisch ausgeschlossen.</p>
@@ -102,7 +117,7 @@
     </section>
 
     <section class="legal-section">
-      <h2>4. Online-Marketing</h2>
+      <h2>5. Online-Marketing</h2>
       <h3>Google Maps</h3>
       <p>Diese Website verwendet Google Maps zur visuellen Darstellung von geographischen Informationen. Google Maps ist ein Angebot der Google Ireland Limited, einer nach irischem Recht eingetragenen und betriebenen Gesellschaft mit Sitz in Gordon House, Barrow Street, Dublin 4, Irland (www.google.de).</p>
       <p><strong>2-Klick-Lösung (Einwilligung durch Klick):</strong> Google Maps wird auf dieser Website <strong>standardmäßig nicht geladen</strong>. Anstelle der Karte sehen Sie zunächst einen Platzhalter mit dem Hinweis „Karte anzeigen" und einem sichtbaren Hinweis, dass beim Klick Daten an Google übertragen werden. Erst durch Ihren <strong>aktiven Klick</strong> auf den Platzhalter wird das Google-Maps-iFrame nachgeladen und damit Ihre Einwilligung in die Datenübertragung an Google erteilt (Art. 6 Abs. 1 lit. a DSGVO). Diese Einwilligung können Sie jederzeit widerrufen, indem Sie die Seite neu laden — die Karte wird dann nicht erneut geladen, solange Sie nicht erneut auf den Platzhalter klicken.</p>
@@ -113,7 +128,7 @@
     </section>
 
     <section class="legal-section">
-      <h2>5. Social Media</h2>
+      <h2>6. Social Media</h2>
       <h3>Unsere Onlinepräsenzen in sozialen Netzwerken</h3>
       <p>Unsere Präsenz auf sozialen Netzwerken und Plattformen dient einer besseren, aktiven Kommunikation mit unseren Kunden und Interessenten. Wir informieren dort über unsere Produkte und laufende Sonderaktionen.</p>
       <p>Bei dem Besuch unserer Onlinepräsenzen in sozialen Medien können Ihre Daten für Marktforschungs- und Werbezwecke automatisch erhoben und gespeichert werden. Aus diesen Daten werden unter Verwendung von Pseudonymen sog. Nutzungsprofile erstellt. Diese können verwendet werden, um z.B. Werbeanzeigen innerhalb und außerhalb der Plattformen zu schalten, die mutmaßlich Ihren Interessen entsprechen. Zu diesem Zweck werden im Regelfall Cookies auf Ihrem Endgerät eingesetzt. In diesen Cookies werden das Besucherverhalten und die Interessen der Nutzer gespeichert. Dies dient gem. Art. 6 Abs. 1 lit. f. DSGVO der Wahrung unserer im Rahmen einer Interessensabwägung überwiegenden berechtigten Interessen an einer optimierten Darstellung unseres Angebots und effektiver Kommunikation mit den Kunden und Interessenten. Falls Sie von den jeweiligen Social-Media Plattformbetreibern um eine Einwilligung (Einverständnis) in die Datenverarbeitung gebeten werden, z.B. mit Hilfe einer Checkbox, ist die Rechtsgrundlage der Datenverarbeitung Art. 6 Abs. 1 lit. a DSGVO.</p>
@@ -128,7 +143,13 @@
     </section>
 
     <section class="legal-section">
-      <h2>6. Kontaktmöglichkeiten und Ihre Rechte</h2>
+      <h2>7. Bildernachweis</h2>
+      <p>Alle auf dieser Website verwendeten Fotos und Grafiken sind Eigentum von Gartenpflege &amp; Service Buzhala, sofern nicht anders angegeben. Die Vorher/Nachher-Fotos in der Projektgalerie wurden mit Zustimmung der jeweiligen Kunden veröffentlicht. Eine Verwendung außerhalb dieser Website ist nicht gestattet.</p>
+      <p>Verwendete externe Bildquellen (sofern zutreffend): keine. Sämtliche Bilder stammen aus eigenem Bestand oder wurden mit ausdrücklicher Erlaubnis der Rechteinhaber verwendet.</p>
+    </section>
+
+    <section class="legal-section">
+      <h2>8. Kontaktmöglichkeiten und Ihre Rechte</h2>
       <p>Als Betroffener haben Sie folgende Rechte:</p>
       <ul>
         <li>gemäß Art. 15 DSGVO das Recht, in dem dort bezeichneten Umfang Auskunft über Ihre von uns verarbeiteten personenbezogenen Daten zu verlangen;</li>
