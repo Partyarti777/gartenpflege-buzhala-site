@@ -48,7 +48,7 @@
           <span class="slider"></span>
         </label>
         <div class="cat-meta"><strong>Statistik</strong> <span>Anonymisiert</span></div>
-        <p>Hilft uns zu verstehen, wie Besucher mit der Website interagieren, durch anonyme Erfassung und Berichterstattung von Daten (z. B. welche Seiten häufig besucht werden).</p>
+        <p>Hilft uns zu verstehen, wie Besucher mit der Website interagieren — durch anonyme Erfassung von Seitenaufrufen (Cloudflare Web Analytics) und Klicks auf die drei mobilen Kontakt-Buttons (Festnetz, Mobil, WhatsApp). Beide ohne Cookies, ohne LocalStorage, ohne Drittstaaten-Transfer. Details in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
       </div>
       <div class="cookie-settings-actions">
         <button type="button" class="btn btn-ghost" id="cookieInlineReject">Ablehnen</button>
@@ -83,7 +83,7 @@
   }
   document.getElementById('cookieInlineReject')?.addEventListener('click', function(){
     if (statBox) statBox.checked = false;
-    writeConsent(false, 'Sie haben Statistik-Cookies abgelehnt — Notwendig bleibt aktiv.');
+    writeConsent(false, 'Sie haben Statistik abgelehnt — Notwendig bleibt aktiv.');
   });
   document.getElementById('cookieInlineSave')?.addEventListener('click', function(){
     writeConsent(!(statBox && !statBox.checked), 'Ihre Auswahl wurde gespeichert.');
@@ -203,9 +203,10 @@
 <div id="site-footer-mount"></div>
 
 <script src="assets/js/partials.js?v=2" defer></script>
+<script src="assets/js/click-stats.js?v=1" defer></script>
 <script src="assets/js/mobile-menu.js?v=1" defer></script>
 
 <script src="assets/js/ext-2click.js?v=1" defer></script>
-<script src="assets/js/cookie-banner.js?v=2" defer></script>
+<script src="assets/js/cookie-banner.js?v=3" defer></script>
 </body>
 </html>

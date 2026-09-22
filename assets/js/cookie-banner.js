@@ -16,7 +16,7 @@
     '  <div class="cookie-inner">',
     '    <div class="cookie-text">',
     '      <strong>🍪 Cookies &amp; Datenschutz</strong>',
-    '      <p>Diese Website verwendet Cookies und vergleichbare Technologien. <strong>Notwendige</strong> Cookies sind für den Betrieb erforderlich. <strong>Statistik</strong> hilft uns, die Seite zu verbessern. Details in der <a href="cookies.html">Cookie-Erklärung</a> und <a href="datenschutz.html">Datenschutzerklärung</a>. <button type="button" class="cookie-info-btn" aria-label="Was bedeutet Statistik-Cookie?">ⓘ</button></p>',
+    '      <p>Diese Website verwendet Cookies und vergleichbare Technologien. <strong>Notwendige</strong> Cookies sind für den Betrieb erforderlich. <strong>Statistik</strong> hilft uns, die Seite zu verbessern — Details in der <a href="cookies.html">Cookie-Erklärung</a> und <a href="datenschutz.html">Datenschutzerklärung</a>. <button type="button" class="cookie-info-btn" aria-label="Was bedeutet Statistik?">ⓘ</button></p>',
     '    </div>',
     '    <div class="cookie-actions">',
     '      <button type="button" class="btn btn-ghost cookie-btn" data-cookie="necessary">Ablehnen</button>',

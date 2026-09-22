@@ -1,0 +1,13 @@
+{
+  "name": "buzhala-stats-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Anonyme Klick-Statistik fuer die 3 mobilen Sticky-Buttons (Festnetz, Mobil, WhatsApp) auf gartenpflegeservicebuzhala.de. DSGVO-konform (keine Cookies, keine IPs, keine User-IDs).",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "devDependencies": {
+    "wrangler": "^4.135.0"
+  }
+}

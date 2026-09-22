@@ -116,6 +116,14 @@
       <p><strong>Auftragsverarbeitung:</strong> Cloudflare Web Analytics ist Teil unserer Auftragsverarbeitung mit Cloudflare Inc. gemäß Art. 28 DSGVO. Es gelten die mit Cloudflare vereinbarten Auftragsverarbeitungsverträge (AVV).</p>
       <p><strong>Widerspruchsrecht (Art. 21 DSGVO):</strong> Sie können der Verarbeitung Ihrer Daten durch Cloudflare Web Analytics jederzeit widersprechen. Da Cloudflare keine personenbezogenen Daten speichert, ist ein technischer Opt-out nur begrenzt möglich — am wirksamsten ist die Aktivierung von „Do-Not-Track" oder „Global Privacy Control" in Ihrem Browser, oder der Einsatz eines Werbeblockers mit aktivem Tracking-Filter. Alternativ erreichen Sie uns über die oben genannten Kontaktdaten für manuelle Lösch-/Auskunftsanfragen.</p>
       <p>Weitere Informationen zum Datenschutz bei Cloudflare finden Sie unter <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener" target="_blank">https://www.cloudflare.com/privacypolicy/</a>.</p>
+      <h3>Anonyme Button-Klick-Statistik (Ergänzung)</h3>
+      <p>Zusätzlich zur Seitenaufruf-Statistik (Cloudflare Web Analytics) erfassen wir anonymisierte Klick-Zähler der drei mobilen Kontakt-Buttons in unserer Kopfzeile (Festnetz, Mobil, WhatsApp). Dies hilft uns zu verstehen, über welchen Kanal Besucher bevorzugt Kontakt aufnehmen, damit wir unser Angebot gezielt verbessern können.</p>
+      <p><strong>Zweck:</strong> Anonyme Reichweitenmessung der Kontaktaufnahme.</p>
+      <p><strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einer statistischen Auswertung der Kontaktwege zur Optimierung unseres Angebots).</p>
+      <p><strong>Erfasste Daten:</strong> ausschließlich die Kennung des angeklickten Buttons (eines von drei möglichen Werten) und ein Zeitstempel. Es werden <strong>keine IP-Adressen gespeichert</strong>, <strong>keine Cookies gesetzt</strong>, <strong>kein LocalStorage verwendet</strong>, <strong>keine User-IDs vergeben</strong> und <strong>kein Fingerprinting betrieben</strong>. Auch der User-Agent-String wird nicht gespeichert.</p>
+      <p><strong>Empfänger / Datenverarbeitung:</strong> Verarbeitung und Speicherung erfolgen über einen von uns betriebenen <strong>Cloudflare Worker</strong> (<code>buzhala-stats</code>, Cloudflare Inc., USA — DPF-zertifiziert) auf einem Cloudflare-EU-Edge (Frankfurt bzw. Stockholm). Die Daten verbleiben in der EU. Es findet <strong>kein Drittlandtransfer</strong> statt und <strong>keine Profilbildung</strong>.</p>
+      <p><strong>Speicherdauer:</strong> Die Tagesauflösung (Datum + Tageszähler pro Button) wird nach <strong>40 Tagen</strong> automatisch gelöscht (Cloudflare-KV-<code>expirationTtl</code>). Der Gesamt-Total-Zähler pro Button bleibt zur langfristigen Trendanalyse dauerhaft gespeichert — er enthält ausschließlich eine Ganzzahl und keine personenbezogenen Daten.</p>
+      <p><strong>Widerspruch und Auskunft:</strong> Sie können der Verarbeitung jederzeit widersprechen oder Auskunft verlangen — kontaktieren Sie uns dazu über die im Impressum angegebenen Wege. Bei einem Widerspruch löschen wir die auf Ihre Anfrage hin erfassten Daten.</p>
     </section>
 
     <section class="legal-section">
@@ -201,9 +209,10 @@
 <div id="site-footer-mount"></div>
 
 <script src="assets/js/partials.js?v=2" defer></script>
+<script src="assets/js/click-stats.js?v=1" defer></script>
 <script src="assets/js/mobile-menu.js?v=1" defer></script>
 
 <script src="assets/js/ext-2click.js?v=1" defer></script>
-<script src="assets/js/cookie-banner.js?v=2" defer></script>
+<script src="assets/js/cookie-banner.js?v=3" defer></script>
 </body>
 </html>

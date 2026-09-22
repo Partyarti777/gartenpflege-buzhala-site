@@ -1,0 +1,22 @@
+name = "buzhala-stats"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# KV-Namespace anlegen via:
+#   wrangler kv:namespace create CLICK_STATS
+# Die ausgegebene ID hier eintragen.
+# Local dev nutzt wrangler dev mit .dev/vars (gitignored).
+
+[[kv_namespaces]]
+binding = "CLICK_STATS"
+id = "TO_BE_FILLED"
+
+[vars]
+# Komma-getrennte Liste der Origins, die POST /count aufrufen duerfen.
+ALLOWED_ORIGIN = "https://gartenpflegeservicebuzhala.de,https://www.gartenpflegeservicebuzhala.de,https://gartenpflege-service-buzhala.pages.dev"
+
+# STATS_TOKEN ist ein SECRET (nicht hier eintragen!):
+#   wrangler secret put STATS_TOKEN
+#   → 48-Char-Hex-Wert eingeben (openssl rand -hex 24).
+# Die volle Stats-URL ist dann:
+#   https://buzhala-stats.workers.dev/stats?token=<STATS_TOKEN>
