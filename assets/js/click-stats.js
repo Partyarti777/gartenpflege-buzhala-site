@@ -57,7 +57,6 @@
     if (!buttonId) return;
     send(buttonId);
     // default action (tel:, wa.me, etc.) läuft weiter — kein preventDefault
-    try { console.log('[click-stats] fired', buttonId, '→', ENDPOINT); } catch (e) {}
   }
 
   // Event-Delegation am document, robust gegen späte Header-Mounts
