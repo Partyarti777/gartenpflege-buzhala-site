@@ -57,9 +57,14 @@ id = "<aus wrangler kv:namespace create>"
 | `total:smfest` | String | `"12"` (laufender Total) | keine |
 | `total:smcall` | String | `"47"` | keine |
 | `total:smwa` | String | `"8"` | keine |
-| `daily:smfest` | JSON-Array | `[{date:"2026-09-22",count:5}, ...]` (max 35 Einträge) | 40 Tage (über metadata) |
-| `daily:smcall` | JSON-Array | dito | 40 Tage |
-| `daily:smwa` | JSON-Array | dito | 40 Tage |
+| `daily:smfest` | JSON-Array | `[{date:"2026-09-22",count:5}, ...]` (max 40 Einträge) | 40 Tage via `expirationTtl: 3456000` |
+| `daily:smcall` | JSON-Array | dito | 40 Tage via `expirationTtl: 3456000` |
+| `daily:smwa` | JSON-Array | dito | 40 Tage via `expirationTtl: 3456000` |
+
+**Wichtig:** KV-TTL wird über die `expirationTtl`-Option beim `put()`-Aufruf
+gesetzt (Sekunden). Das `metadata`-Argument ist frei wählbarer User-Data und
+löst KEINE Expiry aus. Falsche Verwendung würde den 40-Tage-Lösch-Versprechen
+in der Datenschutzerklärung brechen.
 
 KV read-modify-write ist nicht atomar. Drift bei gleichzeitigen Klicks wird
 akzeptiert (für kleines Traffic-Volumen praktisch irrelevant). Falls Drift
@@ -77,8 +82,13 @@ HTML-Seiten eingebunden: `index.html`, `impressum.html`, `datenschutz.html`,
 - Fire-and-forget `navigator.sendBeacon()` gegen `POST /count` mit
   `Blob([JSON.stringify({button:'smcall'})], {type:'application/json'})`
 - Fallback: `fetch(url, {method:'POST', body:..., keepalive:true})`
-- Kein `await`, kein CORS-Preflight (sendBeacon ist simple request), kein
-  UX-Impact
+- **CORS-Preflight-Hinweis:** `application/json` ist KEIN simple content
+  type (laut Fetch-Spec), der Browser sendet daher einen OPTIONS-Preflight
+  vor jedem POST. Der Worker MUSS die OPTIONS-Route (siehe §3.3) korrekt
+  beantworten, sonst scheitert jeder Klick im Cross-Origin-Fall. sendBeacon
+  verschleiert den Preflight gegenüber dem Aufrufer, ändert aber nichts an
+  der Notwendigkeit.
+- Kein `await` im Klick-Handler, kein UX-Impact
 - Defensive Try/Catch um alles — Tracking-Fehler dürfen Klick-Flow nie stören
 
 ### 2.4 Datenschutz-Update `datenschutz.html`
@@ -125,7 +135,9 @@ eigener Top-Level-Abschnitt):
 
 - ❌ Kein sichtbares Counter-Badge auf den Buttons
 - ❌ Keine User-Feedback-Meldung nach Klick
-- ❌ Keine Charts/Graphs (nur Tabelle + optional Sparkline aus 30 Daily-Werten)
+- ❌ Keine externen Charts/Graphs. Tabelle mit optionalem
+  30-Tage-Sparkline-Block pro Button (selbst gerendertes Mini-SVG aus den
+  vorhandenen Daily-Werten, keine Chart-Library)
 - ❌ Kein Bot-Detection via User-Agent
 - ❌ Kein D1-SQL oder Durable Objects (nur wenn Drift empirisch auffällt)
 - ❌ Kein CF Access für Admin-View (Token in URL reicht)
@@ -162,8 +174,8 @@ eigener Top-Level-Abschnitt):
    ├─ Daily:
    │    - Wenn heute schon im Array: count + 1
    │    - Wenn nicht: prepend {date: heute, count: 1}
-   │    - Array auf max 35 Einträge getrimmt (älteste raus)
-   │    - write mit metadata {metadata: {ttl: 40*86400}}
+   │    - Array auf max 40 Einträge getrimmt (älteste raus)
+   │    - write mit `{expirationTtl: 3456000}` (40 Tage × 86400 sec)
    ├─ Response: 204 No Content
    └─ Bei Fehler: 500, geloggt, Browser ignoriert
 ```
@@ -194,18 +206,41 @@ eigener Top-Level-Abschnitt):
 
 ### 3.3 Worker-Response Headers
 
+**CORS-Origin-Logik (gilt für alle Cross-Origin-Antworten):**
+Der Worker liest `ALLOWED_ORIGIN` aus Env (kommaseparierte Liste, siehe §6).
+Bei jeder Antwort mit CORS-Bedarf wird der `Origin`-Header des Requests
+gegen die Liste geprüft:
+- Match → `Access-Control-Allow-Origin` = der konkret anfragende Origin
+  (NICHT die ganze Liste — `*` wäre nur bei Public-APIs erlaubt und würde
+  hier mit `Access-Control-Allow-Credentials` ohnehin nicht funktionieren)
+- Kein Match → 403 ohne CORS-Header
+- Kein `Origin`-Header (z.B. direkter Server-zu-Server-Curl): kein CORS-Header
+  nötig, Antwort geht durch
+
 **CORS-Preflight (`OPTIONS /count`):**
 ```
-Access-Control-Allow-Origin: https://gartenpflegeservicebuzhala.de
+Access-Control-Allow-Origin: <matching Origin aus Liste>
 Access-Control-Allow-Methods: POST, OPTIONS
 Access-Control-Allow-Headers: content-type
 Access-Control-Max-Age: 86400
+Vary: Origin
 ```
 
 **POST /count Response:**
 ```
 HTTP/1.1 204 No Content
-Access-Control-Allow-Origin: https://gartenpflegeservicebuzhala.de
+Access-Control-Allow-Origin: <matching Origin aus Liste>
+Vary: Origin
+```
+
+**GET /stats Response (kein CORS nötig):**
+Dashboard wird direkt im Browser geöffnet, nicht via fetch von einer anderen
+Origin. Daher kein `Access-Control-Allow-Origin` für HTML-Response nötig.
+```
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Cache-Control: no-store, max-age=0
+Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:
 ```
 
 **GET /stats Response:**
@@ -257,16 +292,10 @@ HTML direkt mitsendet. Akzeptabel für rein-private Single-User-View.)
   <table>
     <thead>
       <tr>
-        <th>Button</th>
+        <th>Datum</th>
         <th>Festnetz</th>
         <th>Mobil</th>
         <th>WhatsApp</th>
-      </tr>
-      <tr class="total-row">
-        <th>Gesamt</th>
-        <td class="total">12</td>
-        <td class="total">47</td>
-        <td class="total">8</td>
       </tr>
     </thead>
     <tbody>
@@ -274,6 +303,14 @@ HTML direkt mitsendet. Akzeptabel für rein-private Single-User-View.)
       <tr><td class="date">21.09.2026</td><td>4</td><td>12</td><td>3</td></tr>
       <!-- ... 30 Tage ... -->
     </tbody>
+    <tfoot>
+      <tr class="total-row">
+        <th>Gesamt</th>
+        <td class="total">12</td>
+        <td class="total">47</td>
+        <td class="total">8</td>
+      </tr>
+    </tfoot>
   </table>
 
   <p class="meta" style="margin-top:24px">🔒 Diese URL als Bookmark speichern.
@@ -304,7 +341,10 @@ statt der Tabelle.
 
 **Spam-Schutz:**
 1. Button-Whitelist (nur `smfest`/`smcall`/`smwa`, sonst 400)
-2. Rate-Limit: 20 Klicks / 10s pro IP, dann 429
+2. Rate-Limit: 20 Klicks / 10s pro IP, dann 429. IP-Quelle: Header
+   `CF-Connecting-IP` (von Cloudflare an der Edge gesetzt, nicht
+   spoofbar). `X-Forwarded-For` NICHT direkt vertrauen — kann vom Client
+   gesetzt werden.
 
 **Bewusst NICHT gebaut:**
 - IP-Persistenz (nur in In-Memory per Request, kein KV-Log)
@@ -386,7 +426,9 @@ ohne dokumentierte Rechtsgrundlage).
 2. **KV-Namespace anlegen** + `wrangler.toml` aktualisieren
 3. **`STATS_TOKEN` als Secret setzen**
 4. **`wrangler deploy`** → Worker live unter `buzhala-stats.workers.dev`
-5. **Token in Bitwarden speichern**, Stats-URL bookmarken
+5. **Token in Bitwarden speichern**, Stats-URL bookmarken. Vor DSGVO-Deploy
+   zeigt die Stats-Seite nur den Empty-State "Noch keine Klicks" — das ist
+   erwartet und harmlos
 6. **DSGVO-Update deployen**: `datenschutz.html` + `cookies.html` + `cookie-banner.js` Tooltip-Text
 7. **Frontend deployen**: `assets/js/click-stats.js` + `<script>`-Tags in allen 4 HTML-Dateien
 8. **Smoke-Test gegen Production**: 1× klicken, Stats-URL checken
