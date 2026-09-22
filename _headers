@@ -6,4 +6,4 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://buzhala-contact.buzhala-contact-worker.workers.dev; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://buzhala-contact.buzhala-contact-worker.workers.dev; frame-src https://*.google.com https://*.googleapis.com https://*.gstatic.com; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://buzhala-contact.buzhala-contact-worker.workers.dev; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://buzhala-contact.buzhala-contact-worker.workers.dev https://buzhala-stats.buzhala-contact-worker.workers.dev; frame-src https://*.google.com https://*.googleapis.com https://*.gstatic.com; base-uri 'self'; form-action 'self'

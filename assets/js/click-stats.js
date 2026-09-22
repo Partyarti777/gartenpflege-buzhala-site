@@ -12,7 +12,7 @@
 (function () {
   'use strict';
 
-  var ENDPOINT = 'https://buzhala-stats.workers.dev/count';
+  var ENDPOINT = 'https://buzhala-stats.buzhala-contact-worker.workers.dev/count';
   var BUTTON_CLASSES = ['smfest', 'smcall', 'smwa'];
 
   function getButtonId(anchor) {
