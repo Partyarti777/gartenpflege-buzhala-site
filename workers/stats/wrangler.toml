@@ -9,7 +9,7 @@ compatibility_date = "2024-09-23"
 
 [[kv_namespaces]]
 binding = "CLICK_STATS"
-id = "TO_BE_FILLED"
+id = "d398363121fd4041a28ac498b82784b9"
 
 [vars]
 # Komma-getrennte Liste der Origins, die POST /count aufrufen duerfen.
