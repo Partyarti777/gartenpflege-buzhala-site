@@ -135,9 +135,8 @@ eigener Top-Level-Abschnitt):
 
 - ❌ Kein sichtbares Counter-Badge auf den Buttons
 - ❌ Keine User-Feedback-Meldung nach Klick
-- ❌ Keine externen Charts/Graphs. Tabelle mit optionalem
-  30-Tage-Sparkline-Block pro Button (selbst gerendertes Mini-SVG aus den
-  vorhandenen Daily-Werten, keine Chart-Library)
+- ❌ Keine Charts/Graphs. Reine Tabelle — wenn Trend-Visualisierung
+  später gewünscht, kann Mini-SVG-Sparkline nachgerüstet werden (YAGNI jetzt)
 - ❌ Kein Bot-Detection via User-Agent
 - ❌ Kein D1-SQL oder Durable Objects (nur wenn Drift empirisch auffällt)
 - ❌ Kein CF Access für Admin-View (Token in URL reicht)
@@ -196,10 +195,11 @@ eigener Top-Level-Abschnitt):
    ├─ HTML rendern:
    │    - <h1>Button-Klick-Statistik</h1>
    │    - <p>Letzte Aktualisierung: <time>{jetzt}</time></p>
-   │    - <table> mit 3 Spalten (Festnetz/Mobil/WhatsApp)
-   │      - <thead>: Gesamt-Total + "Trend 30 Tage" (kleine SVG-Sparkline)
+   │    - <table> mit 4 Spalten (Datum / Festnetz / Mobil / WhatsApp)
+   │      - <thead>: Spalten-Header
    │      - <tbody>: letzte 30 Tage, jeweils count pro Button
-   │    - Footer: Token-Hint "URL als Bookmark speichern"
+   │      - <tfoot>: Gesamt-Total pro Button
+   │    - Footer-Hinweis: <p>„URL als Bookmark speichern"</p>
    ├─ Response: 200, text/html, Cache-Control: no-store, max-age=0
    └─ JSON-Variante /stats.json: gleiche Daten, Content-Type application/json
 ```
@@ -243,16 +243,15 @@ Cache-Control: no-store, max-age=0
 Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:
 ```
 
-**GET /stats Response:**
-```
-HTTP/1.1 200 OK
-Content-Type: text/html; charset=utf-8
-Cache-Control: no-store, max-age=0
-Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:
-```
-
 (Hinweis: `style-src 'unsafe-inline'` ist nötig, weil das Inline-`<style>` im
 HTML direkt mitsendet. Akzeptabel für rein-private Single-User-View.)
+
+**OPTIONS-Route-Scope:** §2.1 listet die OPTIONS-Route als Catch-all
+(`*`). Real wird OPTIONS nur für `/count` vom Browser angefragt (Preflight
+vor POST). Andere Pfade (`/stats`, `/stats.json`) kommen ohne Preflight
+direkt — der Token liegt in der URL, kein Cross-Origin-Fetch vom Frontend.
+Implementierung: OPTIONS-Handler matcht nur `/count`, andere Pfade fallen
+durch zur 404.
 
 ---
 
@@ -347,7 +346,12 @@ statt der Tabelle.
    gesetzt werden.
 
 **Bewusst NICHT gebaut:**
-- IP-Persistenz (nur in In-Memory per Request, kein KV-Log)
+- IP-Persistenz in KV. Rate-Limit-State ist **best-effort innerhalb
+  eines Worker-Isolats** (V8-Isolate-Lifetime auf der CF-Edge). Bei Cold-Start
+  eines Isolates beginnt das Counter-Map neu — in der Praxis unkritisch, da
+  CF-Worker an frequentierten Edges warmgehalten werden. Falls echte
+  Persistenz nötig wird: KV-`rate_limit:{ip}` mit `expirationTtl: 60`
+  nachrüstbar (YAGNI jetzt)
 - Bot-Detection via User-Agent
 - Retry-Queue im Browser
 
@@ -410,10 +414,14 @@ wrangler dev
 
 ### 7.3 Production-Tests nach Deploy
 
-1. Mobile-Viewport (Chrome DevTools ≤720px) → Button `.smcall` klicken
-2. Network-Tab → POST `buzhala-stats.workers.dev/count` muss erscheinen, 204
-3. `wrangler kv:key get --binding=CLICK_STATS 'total:smcall'` → muss inkrementiert sein
-4. Stats-URL im Browser öffnen → Tabelle zeigt korrekte Zahlen + heutiges Datum
+1. **Preflight-Check**: In Chrome DevTools Network-Tab muss vor jedem
+   Klick ein `OPTIONS /count` → 204 mit den erwarteten
+   `Access-Control-Allow-*`-Headern erscheinen. Wenn der OPTIONS-Request
+   fehlt oder fehlschlägt, schlägt auch der POST fehl — Bug sofort fixen
+2. Mobile-Viewport (Chrome DevTools ≤720px) → Button `.smcall` klicken
+3. Network-Tab → POST `buzhala-stats.workers.dev/count` muss erscheinen, 204
+4. `wrangler kv:key get --binding=CLICK_STATS 'total:smcall'` → muss inkrementiert sein
+5. Stats-URL im Browser öffnen → Tabelle zeigt korrekte Zahlen + heutiges Datum
 
 ---
 
@@ -463,5 +471,6 @@ ohne dokumentierte Rechtsgrundlage).
 - Mobile-Push-Benachrichtigung bei Klick-Spitzen
 - A/B-Vergleich Button-Reihenfolge
 - E-Mail-Digest (wöchentlich)
+- Mini-SVG-Sparkline pro Button (aus den 30 Daily-Werten)
 
 Diese Features werden bewusst nicht im ersten Wurf gebaut.
