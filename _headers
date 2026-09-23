@@ -7,3 +7,47 @@
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://buzhala-contact.buzhala-contact-worker.workers.dev; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://buzhala-contact.buzhala-contact-worker.workers.dev https://buzhala-stats.buzhala-contact-worker.workers.dev; frame-src https://*.google.com https://*.googleapis.com https://*.gstatic.com; base-uri 'self'; form-action 'self'
+
+# HTML: 5 min Edge-Cache, Browser muss revalidieren
+/*.html
+  Cache-Control: public, max-age=300, must-revalidate
+
+# Versionierte CSS (URL hat ?v=19 als Cache-Buster) — 1 Jahr immutable
+/brand.css
+  Cache-Control: public, max-age=31536000, immutable
+/main.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Static assets — 1 Jahr immutable
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+/videos/*
+  Cache-Control: public, max-age=31536000, immutable
+/favicon.svg
+  Cache-Control: public, max-age=31536000, immutable
+/logo.svg
+  Cache-Control: public, max-age=31536000, immutable
+/og-image.svg
+  Cache-Control: public, max-age=31536000, immutable
+/audit-hero-mobile.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+# 404 — nie cachen (sonst zeigt sich Fehler nach Fix)
+/404.html
+  Cache-Control: public, max-age=0, no-store
+
+# Service Worker — immer frisch vom Server
+/sw.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+# SEO-Files — 1 Stunde Edge-Cache (Crawler revalidieren oft)
+/sitemap.xml
+  Cache-Control: public, max-age=3600, must-revalidate
+/robots.txt
+  Cache-Control: public, max-age=3600, must-revalidate
+/llms.txt
+  Cache-Control: public, max-age=3600, must-revalidate
