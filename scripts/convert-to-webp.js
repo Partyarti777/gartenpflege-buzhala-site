@@ -17,7 +17,7 @@ const args = Object.fromEntries(
     return [k, v];
   })
 );
-const QUALITY = Number(args.quality || 80);
+const QUALITY = Number(args.quality || 75);
 
 const GALLERY_DIRS = [
   // Galerie Vorher/Nachher (40 Bilder: 10 Projekte x vorher/nachher x 540w/1200w)
