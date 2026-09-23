@@ -11,6 +11,8 @@
 # HTML: 5 min Edge-Cache, Browser muss revalidieren
 /*.html
   Cache-Control: public, max-age=300, must-revalidate
+/
+  Cache-Control: public, max-age=300, must-revalidate
 
 # Versionierte CSS (URL hat ?v=19 als Cache-Buster) — 1 Jahr immutable
 /brand.css
