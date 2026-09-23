@@ -2676,9 +2676,18 @@
     var gap = parseFloat(getComputedStyle(grid).gap) || 14;
     return card.offsetWidth + gap;
   }
+  var updateScheduled = false;
   function update(){
-    prev.disabled = grid.scrollLeft <= 1;
-    next.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 1;
+    if (updateScheduled) return;
+    updateScheduled = true;
+    requestAnimationFrame(function(){
+      updateScheduled = false;
+      var scrollLeft = grid.scrollLeft;
+      var clientWidth = grid.clientWidth;
+      var scrollWidth = grid.scrollWidth;
+      prev.disabled = scrollLeft <= 1;
+      next.disabled = scrollLeft + clientWidth >= scrollWidth - 1;
+    });
   }
   // rAF-basierter Smooth-Scroll (robust gegen prefers-reduced-motion + Browser-Bugs)
   function smoothScrollBy(element, distance, duration){
@@ -2708,12 +2717,12 @@
   next.addEventListener('click', function(){
     smoothScrollBy(grid, step());
   });
-  grid.addEventListener('scroll', update);
-  window.addEventListener('resize', update);
+  grid.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
   // Keyboard-Navigation wenn Slider im Focus
   grid.addEventListener('keydown', function(e){
     if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); prev.click(); }
   });
   grid.setAttribute('tabindex', '0');
   update();
@@ -2735,9 +2744,18 @@
     var gap = parseFloat(getComputedStyle(grid).gap) || 14;
     return card.offsetWidth + gap;
   }
+  var updateScheduled = false;
   function update(){
-    prev.disabled = grid.scrollLeft <= 1;
-    next.disabled = grid.scrollLeft + grid.clientWidth >= grid.scrollWidth - 1;
+    if (updateScheduled) return;
+    updateScheduled = true;
+    requestAnimationFrame(function(){
+      updateScheduled = false;
+      var scrollLeft = grid.scrollLeft;
+      var clientWidth = grid.clientWidth;
+      var scrollWidth = grid.scrollWidth;
+      prev.disabled = scrollLeft <= 1;
+      next.disabled = scrollLeft + clientWidth >= scrollWidth - 1;
+    });
   }
   function smoothScrollBy(element, distance, duration){
     duration = duration || 450;
@@ -2761,8 +2779,8 @@
   }
   prev.addEventListener('click', function(){ smoothScrollBy(grid, -step()); });
   next.addEventListener('click', function(){ smoothScrollBy(grid, step()); });
-  grid.addEventListener('scroll', update);
-  window.addEventListener('resize', update);
+  grid.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
   grid.addEventListener('keydown', function(e){
     if (e.key === 'ArrowLeft') { e.preventDefault(); prev.click(); }
     if (e.key === 'ArrowRight') { e.preventDefault(); next.click(); }
